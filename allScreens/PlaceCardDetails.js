@@ -11,6 +11,7 @@ import React from 'react';
 import {useAppStore} from '../store/context';
 import MapView, {Marker, PROVIDER_DEFAULT} from 'react-native-maps';
 import SmallMap from '../components/homeComponents/SmallMap';
+import {mainLocation} from '../data/location';
 
 const PlaceCardDetails = ({route, navigation}) => {
   const {places} = useAppStore();

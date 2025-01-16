@@ -2,9 +2,24 @@ import {StyleSheet, View, Image, Dimensions} from 'react-native';
 import React from 'react';
 import MapView, {Marker, PROVIDER_DEFAULT} from 'react-native-maps';
 import {useAppStore} from '../store/context';
+import {useNavigation} from '@react-navigation/native';
 import {mainLocation} from '../data/location';
+
 const Map = () => {
   const {places} = useAppStore();
+  const navigation = useNavigation();
+
+  // Brisbane center coordinates
+  // const initialRegion = {
+  //   latitude: -27.47,
+  //   longitude: 153.02,
+  //   latitudeDelta: 0.1,
+  //   longitudeDelta: 0.1,
+  // };
+
+  const handleMarkerPress = placeId => {
+    navigation.navigate('PlaceCardDetails', {placeId});
+  };
 
   return (
     <View style={styles.container}>
@@ -20,7 +35,8 @@ const Map = () => {
               longitude: place.location.longitude,
             }}
             title={place.name}
-            description={place.place}>
+            description={place.place}
+            onPress={() => handleMarkerPress(place.id)}>
             <View style={styles.markerContainer}>
               <Image
                 source={{uri: place.image}}
