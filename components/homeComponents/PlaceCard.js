@@ -8,12 +8,13 @@ const PlaceCard = ({title, description, image, id}) => {
   return (
     <TouchableOpacity
       style={styles.card}
-      onPress={() =>
-        navigation.navigate('PlaceCardDetails', {
-          place: {title, description, image, id},
-        })
-      }>
-      <Image source={{uri: image}} style={styles.image} resizeMode="cover" />
+      onPress={() => navigation.navigate('PlaceCardDetails', { placeId: id })}>
+      <Image 
+        source={{uri: image}} 
+        style={styles.image} 
+        resizeMode="cover" 
+      />
+
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>
         <Text style={styles.description} numberOfLines={2}>
