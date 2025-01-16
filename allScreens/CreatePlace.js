@@ -16,23 +16,23 @@ const CreatePlace = ({route, navigation}) => {
     {
       id: 'entertainment',
       name: 'Entertainment',
-      icon: require('../assets/icons/entertainment.png')
+      icon: require('../assets/icons/entertainment.png'),
     },
     {
       id: 'restaurants',
       name: 'Restaurants',
-      icon: require('../assets/icons/restaurant.png')
+      icon: require('../assets/icons/restaurant.png'),
     },
     {
       id: 'walking',
       name: 'Walking',
-      icon: require('../assets/icons/walking.png')
+      icon: require('../assets/icons/walking.png'),
     },
     {
       id: 'attractions',
       name: 'AttractionsSightseeing',
-      icon: require('../assets/icons/attractions.png')
-    }
+      icon: require('../assets/icons/attractions.png'),
+    },
   ];
 
   const handleNext = () => {
@@ -58,42 +58,40 @@ const CreatePlace = ({route, navigation}) => {
 
       {/* Content */}
       <View style={styles.wrapper}>
+        <View style={styles.content}>
+          <Text style={styles.sectionTitle}>Type</Text>
 
-      <View style={styles.content}>
-        <Text style={styles.sectionTitle}>Type</Text>
-
-        <ScrollView
-          style={styles.typeContainer}
-          showsVerticalScrollIndicator={false}>
-          {types.map((type) => (
-            <TouchableOpacity
-            key={type.id}
-            style={[
-              styles.typeButton,
-              selectedType === type.name && styles.selectedType,
-            ]}
-            onPress={() => setSelectedType(type.name)}>
-              <Image
-                source={type.icon}
+          <ScrollView
+            style={styles.typeContainer}
+            showsVerticalScrollIndicator={false}>
+            {types.map(type => (
+              <TouchableOpacity
+                key={type.id}
                 style={[
-                  styles.typeIcon,
-                  selectedType === type.name && styles.selectedTypeIcon,
-                  {tintColor:'#00AAB8'}
+                  styles.typeButton,
+                  selectedType === type.name && styles.selectedType,
                 ]}
+                onPress={() => setSelectedType(type.name)}>
+                <Image
+                  source={type.icon}
+                  style={[
+                    styles.typeIcon,
+                    selectedType === type.name && styles.selectedTypeIcon,
+                    {tintColor: '#00AAB8'},
+                  ]}
                 />
-              <Text
-                style={[
-                  styles.typeText,
-                  selectedType === type.name && styles.selectedTypeText,
-                ]}>
-                {type.name}
-              </Text>
-            </TouchableOpacity>
-          ))}
-        </ScrollView>
+                <Text
+                  style={[
+                    styles.typeText,
+                    selectedType === type.name && styles.selectedTypeText,
+                  ]}>
+                  {type.name}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </ScrollView>
+        </View>
       </View>
-      
-          </View>
 
       {/* Next Button */}
       <TouchableOpacity
@@ -111,7 +109,6 @@ export default CreatePlace;
 const styles = StyleSheet.create({
   wrapper: {
     flex: 1,
-   
   },
   container: {
     flex: 1,
@@ -147,7 +144,6 @@ const styles = StyleSheet.create({
     borderRadius: 18,
     marginHorizontal: 10,
     top: '15%',
-   
   },
   sectionTitle: {
     color: '#666666',
