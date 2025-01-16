@@ -22,6 +22,14 @@ const CreatePlace = () => {
     }
   };
 
+  const categoryIcons = {
+    Entertainment: require('../assets/icons/entertainment.png'),
+    Restaurants: require('../assets/icons/restaurant.png'),
+    Walking: require('../assets/icons/walking.png'),
+    Attractions: require('../assets/icons/attractions.png'),
+  };
+  
+
   return (
     <View style={styles.container}>
       {/* Header */}

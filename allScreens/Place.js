@@ -74,7 +74,7 @@ const Place = ({navigation}) => {
       {/* Add Place Button */}
       <TouchableOpacity
         style={styles.addButton}
-        onPress={() => navigation.navigate('AddPlace')}
+        onPress={() => navigation.navigate('CreatePlace')}
       >
         <Text style={styles.addButtonText}>Add Place</Text>
       </TouchableOpacity>
