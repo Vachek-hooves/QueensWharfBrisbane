@@ -1,31 +1,19 @@
-import {StyleSheet, Text, View, Image, ScrollView, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+} from 'react-native';
 import React, {useState, useEffect} from 'react';
 import {useAppStore} from '../store/context';
+import MainLayout from '../components/latout/MainLayout';
 
 const Home = () => {
   const {places} = useAppStore();
   const [currentTime, setCurrentTime] = useState(new Date());
   const [weather, setWeather] = useState(null);
-  // const [news, setNews] = useState([
-  //   {
-  //     id: 1,
-  //     title: 'Brisbane Kaleidoscope',
-  //     description: 'Brisbane Kaleidoscope Arts Festival attracts creative artists from all ov...',
-  //     image: require('../assets/images/brisbane-city.jpg'),
-  //   },
-  //   {
-  //     id: 2,
-  //     title: 'Ecological Park',
-  //     description: 'В центре Брисбена открылся новый экологический парк',
-  //     image: require('../assets/images/eco-park.jpg'),
-  //   },
-  //   {
-  //     id: 3,
-  //     title: 'Public transport Renewal Program',
-  //     description: 'Brisbane Launches Public Transport Upgrade Program',
-  //     image: require('../assets/images/transport.jpg'),
-  //   },
-  // ]);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -36,58 +24,47 @@ const Home = () => {
   }, []);
 
   return (
-    <ScrollView style={styles.container}>
-      <Text style={styles.title}>Home</Text>
+    <MainLayout>
+      <ScrollView style={styles.container}>
+        <Text style={styles.title}>Home</Text>
 
-      {/* Time and Weather Section */}
-      <View style={styles.timeWeatherContainer}>
-        <View style={styles.timeBox}>
-          <Text style={styles.timeText}>
-            {currentTime.getHours().toString().padStart(2, '0')}
-          </Text>
-          <Text style={styles.ampm}>AM</Text>
-        </View>
-        <View style={styles.timeBox}>
-          <Text style={styles.timeText}>
-            {currentTime.getMinutes().toString().padStart(2, '0')}
-          </Text>
-        </View>
-        <View style={styles.weatherBox}>
-          <Text style={styles.temperature}>24°</Text>
-          <View>
-            <Text style={styles.city}>Brisbane</Text>
-            <Text style={styles.country}>Australia</Text>
+        {/* Time and Weather Section */}
+        <View style={styles.timeWeatherContainer}>
+          <View style={styles.timeBox}>
+            <Text style={styles.timeText}>
+              {currentTime.getHours().toString().padStart(2, '0')}
+            </Text>
+            <Text style={styles.ampm}>AM</Text>
+          </View>
+          <View style={styles.timeBox}>
+            <Text style={styles.timeText}>
+              {currentTime.getMinutes().toString().padStart(2, '0')}
+            </Text>
+          </View>
+          <View style={styles.weatherBox}>
+            <Text style={styles.temperature}>24°</Text>
+            <View>
+              <Text style={styles.city}>Brisbane</Text>
+              <Text style={styles.country}>Australia</Text>
+            </View>
           </View>
         </View>
-      </View>
 
-      {/* People Section */}
-      <TouchableOpacity style={styles.sectionHeader}>
-        <Text style={styles.sectionTitle}>People</Text>
-        <Text style={styles.sectionArrow}>›</Text>
-      </TouchableOpacity>
+        {/* People Section */}
+        <TouchableOpacity style={styles.sectionHeader}>
+          <Text style={styles.sectionTitle}>People</Text>
+          <Text style={styles.sectionArrow}>›</Text>
+        </TouchableOpacity>
 
-      {/* News Section */}
-      <View style={styles.newsSection}>
-        <View style={styles.sectionHeader}>
-          <Text style={styles.sectionTitle}>News</Text>
-          <Text style={styles.sectionLink}>All ›</Text>
+        {/* News Section */}
+        <View style={styles.newsSection}>
+          <View style={styles.sectionHeader}>
+            <Text style={styles.sectionTitle}>News</Text>
+            <Text style={styles.sectionLink}>All ›</Text>
+          </View>
         </View>
-        
-        {/* {news.map(item => (
-          <TouchableOpacity key={item.id} style={styles.newsCard}>
-            <Image source={item.image} style={styles.newsImage} />
-            <View style={styles.newsContent}>
-              <Text style={styles.newsTitle}>{item.title}</Text>
-              <Text style={styles.newsDescription}>{item.description}</Text>
-            </View>
-          </TouchableOpacity>
-        ))} */}
-      </View>
-      
-      {/* Add bottom padding for TabBar */}
-      {/* <View style={styles.tabBarSpacing} /> */}
-    </ScrollView>
+      </ScrollView>
+    </MainLayout>
   );
 };
 
@@ -96,7 +73,7 @@ export default Home;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
+    // backgroundColor: '#000',
     padding: 20,
   },
   title: {

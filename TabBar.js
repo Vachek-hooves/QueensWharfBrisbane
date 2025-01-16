@@ -1,52 +1,50 @@
 import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
-import React from 'react';
 
 const TabBar = ({navigation, activeRoute}) => {
+  console.log(activeRoute);
   return (
     <View style={styles.navbar}>
-      <TouchableOpacity 
+      <TouchableOpacity
         style={styles.navItem}
-        onPress={() => navigation.navigate('Home')}
-      >
-        <Image 
-          source={require('../assets/icons/home.png')} 
-          style={[styles.navIcon, activeRoute === 'Home' && styles.activeNav]} 
+        onPress={() => navigation.navigate('Home')}>
+        <Image
+          source={require('./assets/icons/home.png')}
+          style={[styles.navIcon, activeRoute === 'Home' && styles.activeNav]}
         />
       </TouchableOpacity>
-      <TouchableOpacity 
+      <TouchableOpacity
         style={styles.navItem}
-        onPress={() => navigation.navigate('Map')}
-      >
-        <Image 
-          source={require('../assets/icons/map.png')} 
-          style={[styles.navIcon, activeRoute === 'Map' && styles.activeNav]} 
+        onPress={() => navigation.navigate('Map')}>
+        <Image
+          source={require('./assets/icons/map.png')}
+          style={[styles.navIcon, activeRoute === 'Map' && styles.activeNav]}
         />
       </TouchableOpacity>
-      <TouchableOpacity 
+      <TouchableOpacity
         style={styles.navItem}
-        onPress={() => navigation.navigate('Places')}
-      >
-        <Image 
-          source={require('../assets/icons/location.png')} 
-          style={[styles.navIcon, activeRoute === 'Places' && styles.activeNav]} 
+        onPress={() => navigation.navigate('Places')}>
+        <Image
+          source={require('./assets/icons/place.png')}
+          style={[styles.navIcon, activeRoute === 'Places' && styles.activeNav]}
         />
       </TouchableOpacity>
-      <TouchableOpacity 
+      <TouchableOpacity
         style={styles.navItem}
-        onPress={() => navigation.navigate('Trips')}
-      >
-        <Image 
-          source={require('../assets/icons/suitcase.png')} 
-          style={[styles.navIcon, activeRoute === 'Trips' && styles.activeNav]} 
+        onPress={() => navigation.navigate('Trips')}>
+        <Image
+          source={require('./assets/icons/trips.png')}
+          style={[styles.navIcon, activeRoute === 'Trips' && styles.activeNav]}
         />
       </TouchableOpacity>
-      <TouchableOpacity 
+      <TouchableOpacity
         style={styles.navItem}
-        onPress={() => navigation.navigate('Settings')}
-      >
-        <Image 
-          source={require('../assets/icons/settings.png')} 
-          style={[styles.navIcon, activeRoute === 'Settings' && styles.activeNav]} 
+        onPress={() => navigation.navigate('Settings')}>
+        <Image
+          source={require('./assets/icons/settings.png')}
+          style={[
+            styles.navIcon,
+            activeRoute === 'Settings' && styles.activeNav,
+          ]}
         />
       </TouchableOpacity>
     </View>
@@ -59,7 +57,7 @@ const styles = StyleSheet.create({
   navbar: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    backgroundColor: '#001F1F',
+    backgroundColor: '#00353C',
     borderRadius: 25,
     padding: 15,
     marginTop: 20,
@@ -68,13 +66,14 @@ const styles = StyleSheet.create({
     bottom: 30,
     left: 0,
     right: 0,
+    height: 80,
   },
   navIcon: {
-    width: 24,
-    height: 24,
-    tintColor: '#666',
+    width: 36,
+    height: 36,
+    tintColor: '#FFFFFF',
   },
   activeNav: {
-    tintColor: '#00FFFF',
+    tintColor: '#00AAB8',
   },
 });
