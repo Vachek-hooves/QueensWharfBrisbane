@@ -28,7 +28,10 @@ const PlaceCardDetails = ({route, navigation}) => {
         <TouchableOpacity
           onPress={() => navigation.goBack()}
           style={styles.backButton}>
-          <Text style={styles.backIcon}>{'<'}</Text>
+          <Image
+            source={require('../assets/icons/back.png')}
+            style={{height: 50, width: 50}}
+          />
         </TouchableOpacity>
         <Text style={styles.headerTitle} numberOfLines={1}>
           {place.name}
@@ -37,6 +40,7 @@ const PlaceCardDetails = ({route, navigation}) => {
 
       <ScrollView style={styles.scrollView}>
         {/* Main Image */}
+
         <View style={styles.imageContainer}>
           <Image
             source={{uri: place.image}}
@@ -121,6 +125,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
     paddingTop: 60,
     paddingBottom: 20,
+    justifyContent: 'space-between',
   },
   backButton: {
     width: 40,
@@ -138,24 +143,30 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     marginLeft: 10,
     flex: 1,
+    textAlign: 'center',
   },
   scrollView: {
     flex: 1,
   },
+  contentWrapper: {
+    marginTop: 20,
+    paddingHorizontal: 20,
+  },
   imageContainer: {
     alignItems: 'center',
-    marginVertical: 20,
+    zIndex: 2,
+    marginBottom: -100, // Half of the image height to create overlap
   },
   mainImage: {
-    width: '100%',
-    height: 300,
-    // borderRadius: 100,
+    width: 200,
+    height: 200,
+    borderRadius: 100,
   },
   content: {
-    padding: 20,
     backgroundColor: '#001F1F',
     borderRadius: 20,
-    margin: 20,
+    padding: 20,
+    paddingTop: 120, // Extra padding to account for image overlap
   },
   title: {
     color: '#FFFFFF',
@@ -209,5 +220,11 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginLeft: 16,
     marginBottom: 4,
+  },
+  description: {
+    color: '#666666',
+    fontSize: 16,
+    lineHeight: 24,
+    marginBottom: 20,
   },
 });
