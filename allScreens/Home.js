@@ -15,6 +15,7 @@ const Home = () => {
   const {places} = useAppStore();
   const [currentTime, setCurrentTime] = useState(new Date());
   const [weather, setWeather] = useState(null);
+  console.log(places.length);
 
   useEffect(() => {
     const timer = setInterval(() => {
@@ -67,7 +68,7 @@ const Home = () => {
           </View>
         </View>
 
-        {places.slice(0, 5).map(place => (
+        {places.map(place => (
           <PlaceCard
             key={place.id}
             title={place.name}
@@ -76,6 +77,7 @@ const Home = () => {
           />
         ))}
       </ScrollView>
+      <View style={{height: 130}} />
     </MainLayout>
   );
 };

@@ -25,12 +25,13 @@ const styles = StyleSheet.create({
     overflow: 'hidden',
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10,
+    paddingHorizontal: 15,
+    paddingVertical: 20,
   },
   image: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
+    width: 130,
+    height: 130,
+    borderRadius: '50%',
   },
   content: {
     flex: 1,

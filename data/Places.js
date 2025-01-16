@@ -36,7 +36,7 @@ export const PLACES = [
       longitude: 152.933250343547,
     },
     description: "Scenic lookout offering panoramic views of Brisbane city, Moreton Bay, and surrounding regions.",
-    image: "https://www.brisbane.qld.gov.au/content/dam/brisbane/images/things-to-do/parks-and-gardens/parks-and-gardens-images/mt-coot-tha-lookout-16x9.jpg",
+    image: "https://media.istockphoto.com/id/1130803952/photo/coin-operated-binoculars-pointed-at-brisbane-cbd-skyline-from-lookout.jpg?s=612x612&w=0&k=20&c=y1CSPtY78eTSVrTChoeVMTW-5-rWASYLXc7U6Z5br6w=",
     elevation: "287m",
     category: "Nature",
     amenities: ["Restaurant", "Cafe", "Parking", "Viewing platforms"]
