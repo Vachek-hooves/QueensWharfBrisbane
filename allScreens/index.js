@@ -1,2 +1,3 @@
 import WellcomeAppScreen from './WellcomeAppScreen';
-export {WellcomeAppScreen};
+import Home from './Home';
+export {WellcomeAppScreen, Home};
