@@ -31,7 +31,7 @@ const NavigationMenu = () => {
       }}>
       <Tab.Screen name="Home" component={Home} />
       <Tab.Screen name="Map" component={Map} />
-      <Tab.Screen name="Places" component={Place} />
+      <Tab.Screen name="Place" component={Place} />
       <Tab.Screen name="Trips" component={Trips} />
       <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>

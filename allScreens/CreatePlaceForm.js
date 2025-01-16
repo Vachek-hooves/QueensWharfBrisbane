@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {
   StyleSheet,
   Text,
@@ -16,6 +16,7 @@ import MapView, {Marker} from 'react-native-maps';
 
 const CreatePlaceForm = ({route, navigation}) => {
   const {category} = route.params;
+  const {addPlace} = useAppStore();
   const [image, setImage] = useState(null);
   const [formData, setFormData] = useState({
     placeName: '',
@@ -33,7 +34,25 @@ const CreatePlaceForm = ({route, navigation}) => {
   });
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [timePickerType, setTimePickerType] = useState('from');
-  console.log(isMapVisible);
+  const [isFormValid, setIsFormValid] = useState(false);
+
+  // Validate form whenever data changes
+  useEffect(() => {
+    const validateForm = () => {
+      const isValid = 
+        image !== null &&
+        formData.placeName.trim() !== '' &&
+        formData.location !== '' &&
+        formData.description.trim() !== '' &&
+        workingHours.from !== '' &&
+        workingHours.to !== '' &&
+        formData.conveniences.length >= 0;
+      
+      setIsFormValid(isValid);
+    };
+
+    validateForm();
+  }, [image, formData, workingHours]);
 
   const handleAddConvenience = () => {
     if (newConvenience.trim()) {
@@ -45,9 +64,23 @@ const CreatePlaceForm = ({route, navigation}) => {
     }
   };
 
-  const handleSubmit = () => {
-    // Handle form submission
-    navigation.navigate('Home');
+  const handleSubmit = async () => {
+    if (!isFormValid) return;
+    console.log('form is valid');
+
+    const newPlace = {
+      id: Date.now().toString(),
+      image,
+      category,
+      name: formData.placeName,
+      location: formData.location,
+      description: formData.description,
+      workingHours: `${workingHours.from} - ${workingHours.to}`,
+      conveniences: formData.conveniences,
+    };
+    console.log(newPlace);
+    await addPlace(newPlace);
+    navigation.navigate('NavigationMenu',{screen:'Place'});
   };
 
   const handleImagePick = async () => {
@@ -193,7 +226,10 @@ const CreatePlaceForm = ({route, navigation}) => {
       </ScrollView>
 
       {/* Submit Button */}
-      <TouchableOpacity style={styles.doneButton} onPress={handleSubmit}>
+      <TouchableOpacity 
+        style={[styles.doneButton, isFormValid && styles.doneButtonActive]}
+        onPress={handleSubmit}
+        disabled={!isFormValid}>
         <Text style={styles.doneButtonText}>Done</Text>
       </TouchableOpacity>
 
@@ -377,6 +413,9 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 25,
     alignItems: 'center',
+  },
+  doneButtonActive: {
+    backgroundColor: '#00AAB8',
   },
   doneButtonText: {
     color: '#FFFFFF',
