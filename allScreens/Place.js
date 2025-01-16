@@ -4,25 +4,47 @@ import {
   Text,
   View,
   TouchableOpacity,
-  Image,
   ScrollView,
+  Image,
 } from 'react-native';
-import {useAppStore} from '../store/context';
 
 const Place = ({navigation}) => {
-  const {places} = useAppStore();
   const [selectedType, setSelectedType] = useState('Entertainment');
 
-  // Extract unique categories
-  const types = [...new Set(places.map(place => place.category))];
+  // Define fixed categories
+  const types = [
+    'Entertainment',
+    'Restaurants',
+    'Walking',
+    'Attractions'
+  ];
 
-  // Filter places by selected type
-  const filteredPlaces = places.filter(place => place.category === selectedType);
+  // Icons mapping (you'll need to add these icons to your assets)
+  const categoryIcons = {
+    'Entertainment': require('../assets/icons/entertainment.png'),
+    'Restaurants': require('../assets/icons/restaurant.png'),
+    'Walking': require('../assets/icons/walking.png'),
+    'Attractions': require('../assets/icons/attractions.png'),
+  };
+
+  const handleNext = () => {
+    if (selectedType) {
+      navigation.navigate('CreatePlace', { category: selectedType });
+    }
+  };
 
   return (
     <View style={styles.container}>
       {/* Header */}
-      <Text style={styles.headerTitle}>Place</Text>
+      <View style={styles.header}>
+        <TouchableOpacity 
+          onPress={() => navigation.goBack()} 
+          style={styles.backButton}
+        >
+          <Text style={styles.backIcon}>{'<'}</Text>
+        </TouchableOpacity>
+        <Text style={styles.headerTitle}>Place</Text>
+      </View>
 
       {/* Types ScrollView */}
       <ScrollView 
@@ -39,6 +61,13 @@ const Place = ({navigation}) => {
             ]}
             onPress={() => setSelectedType(type)}
           >
+            <Image
+              source={categoryIcons[type]}
+              style={[
+                styles.typeIcon,
+                selectedType === type && styles.selectedTypeIcon
+              ]}
+            />
             <Text style={[
               styles.typeText,
               selectedType === type && styles.selectedTypeText,
@@ -49,34 +78,12 @@ const Place = ({navigation}) => {
         ))}
       </ScrollView>
 
-      {/* Places List */}
-      <ScrollView style={styles.placesContainer}>
-        {filteredPlaces.map((place) => (
-          <TouchableOpacity
-            key={place.id}
-            style={styles.placeCard}
-            onPress={() => navigation.navigate('PlaceCardDetails', { placeId: place.id })}
-          >
-            <Image
-              source={{ uri: place.image }}
-              style={styles.placeImage}
-            />
-            <View style={styles.placeInfo}>
-              <Text style={styles.placeName}>{place.name}</Text>
-              <Text style={styles.placeDescription} numberOfLines={2}>
-                {place.description}
-              </Text>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-
-      {/* Add Place Button */}
+      {/* Next Button */}
       <TouchableOpacity
-        style={styles.addButton}
-        onPress={() => navigation.navigate('CreatePlace')}
+        style={styles.nextButton}
+        onPress={handleNext}
       >
-        <Text style={styles.addButtonText}>Add Place</Text>
+        <Text style={styles.nextButtonText}>Next</Text>
       </TouchableOpacity>
     </View>
   );
@@ -88,29 +95,57 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000000',
+  },
+  header: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingHorizontal: 20,
     paddingTop: 60,
+    paddingBottom: 20,
+  },
+  backButton: {
+    width: 40,
+    height: 40,
+    justifyContent: 'center',
+  },
+  backIcon: {
+    color: '#00AAB8',
+    fontSize: 24,
   },
   headerTitle: {
     color: '#FFFFFF',
     fontSize: 24,
     fontWeight: 'bold',
-    textAlign: 'center',
-    marginBottom: 20,
+    marginLeft: 10,
   },
   typesContainer: {
-    maxHeight: 50,
+    maxHeight: 70,
     paddingHorizontal: 20,
-    marginBottom: 20,
+    marginTop: 20,
   },
   typeButton: {
+    flexDirection: 'row',
+    alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 10,
+    paddingVertical: 15,
     marginRight: 10,
-    borderRadius: 20,
-    backgroundColor: '#00181C',
+    borderRadius: 15,
+    backgroundColor: '#00353C',
+    minWidth: 150,
   },
   selectedTypeButton: {
-    backgroundColor: '#00181C',
+    backgroundColor: '#00353C',
+    borderWidth: 4,
+    borderColor: '#00AAB8',
+  },
+  typeIcon: {
+    width: 24,
+    height: 24,
+    marginRight: 10,
+    tintColor: '#666666',
+  },
+  selectedTypeIcon: {
+    tintColor: '#FFFFFF',
   },
   typeText: {
     color: '#666666',
@@ -118,51 +153,22 @@ const styles = StyleSheet.create({
   },
   selectedTypeText: {
     color: '#FFFFFF',
-  },
-  placesContainer: {
-    flex: 1,
-    paddingHorizontal: 20,
-  },
-  placeCard: {
-    flexDirection: 'row',
-    backgroundColor: '#00181C',
-    borderRadius: 15,
-    padding: 10,
-    marginBottom: 15,
-    alignItems: 'center',
-  },
-  placeImage: {
-    width: 80,
-    height: 80,
-    borderRadius: 40,
-  },
-  placeInfo: {
-    flex: 1,
-    marginLeft: 15,
-  },
-  placeName: {
-    color: '#FFFFFF',
-    fontSize: 18,
     fontWeight: 'bold',
-    marginBottom: 5,
   },
-  placeDescription: {
-    color: '#666666',
-    fontSize: 14,
-    lineHeight: 20,
-  },
-  addButton: {
+  nextButton: {
     backgroundColor: '#00AAB8',
     marginHorizontal: 20,
-    marginVertical: 20,
     padding: 15,
     borderRadius: 25,
-    alignItems: 'center',
-    bottom:'15%'
+    position: 'absolute',
+    bottom: 40,
+    left: 0,
+    right: 0,
   },
-  addButtonText: {
+  nextButtonText: {
     color: '#FFFFFF',
     fontSize: 16,
     fontWeight: 'bold',
+    textAlign: 'center',
   },
 });
