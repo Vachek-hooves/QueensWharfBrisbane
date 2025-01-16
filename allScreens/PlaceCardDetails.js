@@ -9,7 +9,8 @@ import {
 } from 'react-native';
 import React from 'react';
 import {useAppStore} from '../store/context';
-import MapView, {Marker} from 'react-native-maps';
+import MapView, {Marker, PROVIDER_DEFAULT} from 'react-native-maps';
+import SmallMap from '../components/homeComponents/SmallMap';
 
 const PlaceCardDetails = ({route, navigation}) => {
   const {places} = useAppStore();
@@ -92,26 +93,14 @@ const PlaceCardDetails = ({route, navigation}) => {
               Longitude: {place.location.longitude}
             </Text>
 
+            <SmallMap
+              latitude={place.location.latitude}
+              longitude={place.location.longitude}
+              title={place.name}
+              description={place.place}
+            />
+
             {/* Map View */}
-            <View style={styles.mapContainer}>
-              <MapView
-                style={styles.map}
-                initialRegion={{
-                  latitude: place.location.latitude,
-                  longitude: place.location.longitude,
-                  latitudeDelta: 0.01,
-                  longitudeDelta: 0.01,
-                }}>
-                <Marker
-                  coordinate={{
-                    latitude: place.location.latitude,
-                    longitude: place.location.longitude,
-                  }}
-                  title={place.name}
-                  description={place.place}
-                />
-              </MapView>
-            </View>
           </View>
         </View>
       </ScrollView>
@@ -158,9 +147,9 @@ const styles = StyleSheet.create({
     marginVertical: 20,
   },
   mainImage: {
-    width: 200,
-    height: 200,
-    borderRadius: 100,
+    width: '100%',
+    height: 300,
+    // borderRadius: 100,
   },
   content: {
     padding: 20,
@@ -220,15 +209,5 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginLeft: 16,
     marginBottom: 4,
-  },
-  mapContainer: {
-    marginTop: 15,
-    borderRadius: 12,
-    overflow: 'hidden',
-    height: 200,
-  },
-  map: {
-    width: '100%',
-    height: '100%',
   },
 });
