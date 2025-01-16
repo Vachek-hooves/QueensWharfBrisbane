@@ -7,28 +7,39 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
-import {useAppStore} from '../store/context';
 
-const CreatePlace = () => {
-  const {places} = useAppStore();
+const CreatePlace = ({route, navigation}) => {
   const [selectedType, setSelectedType] = useState(null);
 
-  // Extract unique categories from places
-  const types = [...new Set(places.map(place => place.category))];
+  // Define fixed types with their icons
+  const types = [
+    {
+      id: 'entertainment',
+      name: 'Entertainment',
+      icon: require('../assets/icons/entertainment.png')
+    },
+    {
+      id: 'restaurants',
+      name: 'Restaurants',
+      icon: require('../assets/icons/restaurant.png')
+    },
+    {
+      id: 'walking',
+      name: 'Walking',
+      icon: require('../assets/icons/walking.png')
+    },
+    {
+      id: 'attractions',
+      name: 'AttractionsSightseeing',
+      icon: require('../assets/icons/attractions.png')
+    }
+  ];
 
   const handleNext = () => {
     if (selectedType) {
       navigation.navigate('AddPlaceDetails', {category: selectedType});
     }
   };
-
-  const categoryIcons = {
-    Entertainment: require('../assets/icons/entertainment.png'),
-    Restaurants: require('../assets/icons/restaurant.png'),
-    Walking: require('../assets/icons/walking.png'),
-    Attractions: require('../assets/icons/attractions.png'),
-  };
-  
 
   return (
     <View style={styles.container}>
@@ -45,40 +56,44 @@ const CreatePlace = () => {
         <Text style={styles.headerTitle}>Add Place</Text>
       </View>
 
-      {/* Type Selection */}
+      {/* Content */}
+      <View style={styles.wrapper}>
+
       <View style={styles.content}>
         <Text style={styles.sectionTitle}>Type</Text>
 
         <ScrollView
           style={styles.typeContainer}
           showsVerticalScrollIndicator={false}>
-          {types.map(type => (
+          {types.map((type) => (
             <TouchableOpacity
-              key={type}
-              style={[
-                styles.typeButton,
-                {backgroundColor: '#00353C'},
-                selectedType === type && styles.selectedType,
-              ]}
-              onPress={() => setSelectedType(type)}>
+            key={type.id}
+            style={[
+              styles.typeButton,
+              selectedType === type.name && styles.selectedType,
+            ]}
+            onPress={() => setSelectedType(type.name)}>
               <Image
-                // source={categoryIcons[type]}
+                source={type.icon}
                 style={[
                   styles.typeIcon,
-                  selectedType === type && styles.selectedTypeIcon,
+                  selectedType === type.name && styles.selectedTypeIcon,
+                  {tintColor:'#00AAB8'}
                 ]}
-              />
+                />
               <Text
                 style={[
                   styles.typeText,
-                  selectedType === type && styles.selectedTypeText,
+                  selectedType === type.name && styles.selectedTypeText,
                 ]}>
-                {type}
+                {type.name}
               </Text>
             </TouchableOpacity>
           ))}
         </ScrollView>
       </View>
+      
+          </View>
 
       {/* Next Button */}
       <TouchableOpacity
@@ -94,16 +109,19 @@ const CreatePlace = () => {
 export default CreatePlace;
 
 const styles = StyleSheet.create({
+  wrapper: {
+    flex: 1,
+   
+  },
   container: {
     flex: 1,
-    // backgroundColor: '#00181C',
     backgroundColor: '#000000',
   },
   header: {
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingTop: 60,
+    paddingTop: 100,
     paddingBottom: 20,
   },
   backButton: {
@@ -123,11 +141,13 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   content: {
-    flex: 1,
+    // flex: 1,
     padding: 20,
     backgroundColor: '#00181C',
     borderRadius: 18,
     marginHorizontal: 10,
+    top: '15%',
+   
   },
   sectionTitle: {
     color: '#666666',
@@ -135,10 +155,8 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   typeContainer: {
-    // backgroundColor: '#00353C',
     borderRadius: 20,
     padding: 10,
-    maxHeight: '80%',
   },
   typeButton: {
     flexDirection: 'row',
@@ -146,7 +164,6 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 32,
     marginBottom: 8,
-    // borderWidth: 4,
     backgroundColor: '#00353C',
   },
   selectedType: {
@@ -155,8 +172,8 @@ const styles = StyleSheet.create({
     borderColor: '#00AAB8',
   },
   typeIcon: {
-    width: 24,
-    height: 24,
+    width: 34,
+    height: 34,
     marginRight: 15,
     tintColor: '#666666',
   },
@@ -165,7 +182,7 @@ const styles = StyleSheet.create({
   },
   typeText: {
     color: '#FFFFFF',
-    fontSize: 18,
+    fontSize: 20,
   },
   selectedTypeText: {
     color: '#FFFFFF',
@@ -177,7 +194,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 25,
     position: 'absolute',
-    bottom: 40,
+    bottom: 60,
     left: 0,
     right: 0,
   },
