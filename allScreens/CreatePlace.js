@@ -37,7 +37,7 @@ const CreatePlace = ({route, navigation}) => {
 
   const handleNext = () => {
     if (selectedType) {
-      navigation.navigate('AddPlaceDetails', {category: selectedType});
+      navigation.navigate('CreatePlaceForm', {category: selectedType});
     }
   };
 

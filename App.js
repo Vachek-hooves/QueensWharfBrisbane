@@ -5,6 +5,7 @@ import {ContextProvider} from './store/context';
 import NavigationMenu from './NavigationMenu';
 import PlaceCardDetails from './allScreens/PlaceCardDetails';
 import CreatePlace from './allScreens/CreatePlace';
+import CreatePlaceForm from './allScreens/CreatePlaceForm';
 const Stack = createNativeStackNavigator();
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
           <Stack.Screen name="WelcomeAppScreen" component={WellcomeAppScreen} />
           <Stack.Screen name="PlaceCardDetails" component={PlaceCardDetails} />
           <Stack.Screen name="CreatePlace" component={CreatePlace} />
+          <Stack.Screen name="CreatePlaceForm" component={CreatePlaceForm} />
         </Stack.Navigator>
       </NavigationContainer>
     </ContextProvider>
