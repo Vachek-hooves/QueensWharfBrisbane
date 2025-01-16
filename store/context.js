@@ -6,15 +6,17 @@ export const StoreContext = createContext({});
 
 export const ContextProvider = ({children}) => {
   const [places, setPlaces] = useState([]);
+  const [customPlaces, setCustomPlaces] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   
 
   // Initialize places data
   useEffect(() => {
     loadPlaces();
+    loadCustomPlaces();
   }, []);
 
-  // Load places from AsyncStorage
+  // Load default places from AsyncStorage
   const loadPlaces = async () => {
     try {
       const storedPlaces = await AsyncStorage.getItem('places');
@@ -33,20 +35,34 @@ export const ContextProvider = ({children}) => {
     }
   };
 
-  // Save places to AsyncStorage
-  const savePlaces = async (updatedPlaces) => {
+  // Load custom places from AsyncStorage
+  const loadCustomPlaces = async () => {
     try {
-      await AsyncStorage.setItem('places', JSON.stringify(updatedPlaces));
-      setPlaces(updatedPlaces);
+      const storedCustomPlaces = await AsyncStorage.getItem('customPlaces');
+      if (storedCustomPlaces) {
+        setCustomPlaces(JSON.parse(storedCustomPlaces));
+      }
     } catch (error) {
-      console.error('Error saving places:', error);
+      console.error('Error loading custom places:', error);
+    }
+  };
+
+  // Save custom places to AsyncStorage
+  const addPlace = async (newPlace) => {
+    try {
+      const updatedCustomPlaces = [...customPlaces, newPlace];
+      await AsyncStorage.setItem('customPlaces', JSON.stringify(updatedCustomPlaces));
+      setCustomPlaces(updatedCustomPlaces);
+    } catch (error) {
+      console.error('Error saving custom place:', error);
     }
   };
 
   const value = {
     places,
+    customPlaces,
     isLoading,
-    savePlaces,
+    addPlace,
   };
 
   return (

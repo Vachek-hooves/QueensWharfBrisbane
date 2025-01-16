@@ -22,7 +22,7 @@ const TabBar = ({navigation, activeRoute}) => {
       </TouchableOpacity>
       <TouchableOpacity
         style={styles.navItem}
-        onPress={() => navigation.navigate('Places')}>
+        onPress={() => navigation.navigate('Place')}>
         <Image
           source={require('./assets/icons/place.png')}
           style={[styles.navIcon, activeRoute === 'Places' && styles.activeNav]}

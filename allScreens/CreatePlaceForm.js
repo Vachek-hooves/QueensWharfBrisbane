@@ -12,7 +12,7 @@ import {
 import {useAppStore} from '../store/context';
 import {launchImageLibrary} from 'react-native-image-picker';
 import MapView, {Marker} from 'react-native-maps';
-// import Modal from 'react-native-modal';
+
 
 const CreatePlaceForm = ({route, navigation}) => {
   const {category} = route.params;
@@ -79,8 +79,8 @@ const CreatePlaceForm = ({route, navigation}) => {
       conveniences: formData.conveniences,
     };
     console.log(newPlace);
+    navigation.navigate('NavigationMenu', {screen: 'Place'});
     await addPlace(newPlace);
-    navigation.navigate('NavigationMenu',{screen:'Place'});
   };
 
   const handleImagePick = async () => {

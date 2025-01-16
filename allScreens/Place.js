@@ -7,29 +7,27 @@ import {
   ScrollView,
   Image,
 } from 'react-native';
+import {useAppStore} from '../store/context';
 
 const Place = ({navigation}) => {
+  const {places, customPlaces} = useAppStore();
   const [selectedType, setSelectedType] = useState('Entertainment');
+  console.log(customPlaces);
 
   // Define fixed categories
-  const types = [
-    'Entertainment',
-    'Restaurants',
-    'Walking',
-    'Attractions'
-  ];
+  const types = ['Entertainment', 'Restaurants', 'Walking', 'Attractions'];
 
   // Icons mapping (you'll need to add these icons to your assets)
   const categoryIcons = {
-    'Entertainment': require('../assets/icons/entertainment.png'),
-    'Restaurants': require('../assets/icons/restaurant.png'),
-    'Walking': require('../assets/icons/walking.png'),
-    'Attractions': require('../assets/icons/attractions.png'),
+    Entertainment: require('../assets/icons/entertainment.png'),
+    Restaurants: require('../assets/icons/restaurant.png'),
+    Walking: require('../assets/icons/walking.png'),
+    Attractions: require('../assets/icons/attractions.png'),
   };
 
   const handleNext = () => {
     if (selectedType) {
-      navigation.navigate('CreatePlace', { category: selectedType });
+      navigation.navigate('CreatePlace', {category: selectedType});
     }
   };
 
@@ -37,41 +35,39 @@ const Place = ({navigation}) => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity 
-          onPress={() => navigation.goBack()} 
-          style={styles.backButton}
-        >
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.backButton}>
           <Text style={styles.backIcon}>{'<'}</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitle}>Place</Text>
       </View>
 
       {/* Types ScrollView */}
-      <ScrollView 
-        horizontal 
+      <ScrollView
+        horizontal
         showsHorizontalScrollIndicator={false}
-        style={styles.typesContainer}
-      >
-        {types.map((type) => (
+        style={styles.typesContainer}>
+        {types.map(type => (
           <TouchableOpacity
             key={type}
             style={[
               styles.typeButton,
               selectedType === type && styles.selectedTypeButton,
             ]}
-            onPress={() => setSelectedType(type)}
-          >
+            onPress={() => setSelectedType(type)}>
             <Image
               source={categoryIcons[type]}
               style={[
                 styles.typeIcon,
-                selectedType === type && styles.selectedTypeIcon
+                selectedType === type && styles.selectedTypeIcon,
               ]}
             />
-            <Text style={[
-              styles.typeText,
-              selectedType === type && styles.selectedTypeText,
-            ]}>
+            <Text
+              style={[
+                styles.typeText,
+                selectedType === type && styles.selectedTypeText,
+              ]}>
               {type}
             </Text>
           </TouchableOpacity>
@@ -79,10 +75,7 @@ const Place = ({navigation}) => {
       </ScrollView>
 
       {/* Next Button */}
-      <TouchableOpacity
-        style={styles.nextButton}
-        onPress={handleNext}
-      >
+      <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
         <Text style={styles.nextButtonText}>Next</Text>
       </TouchableOpacity>
     </View>
