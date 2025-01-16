@@ -1,4 +1,4 @@
-package com.queenswharfbrisbane
+package com.queentravel.tobrisbane
 
 import android.app.Application
 import com.facebook.react.PackageList
