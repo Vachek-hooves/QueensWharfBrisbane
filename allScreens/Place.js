@@ -158,6 +158,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 25,
     alignItems: 'center',
+    bottom:'15%'
   },
   addButtonText: {
     color: '#FFFFFF',
