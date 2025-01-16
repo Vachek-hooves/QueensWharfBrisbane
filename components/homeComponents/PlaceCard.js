@@ -1,9 +1,18 @@
 import React from 'react';
 import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
+import {useNavigation} from '@react-navigation/native';
 
-const PlaceCard = ({title, description, image}) => {
+const PlaceCard = ({title, description, image, id}) => {
+  const navigation = useNavigation();
+
   return (
-    <TouchableOpacity style={styles.card}>
+    <TouchableOpacity
+      style={styles.card}
+      onPress={() =>
+        navigation.navigate('PlaceCardDetails', {
+          place: {title, description, image, id},
+        })
+      }>
       <Image source={{uri: image}} style={styles.image} resizeMode="cover" />
       <View style={styles.content}>
         <Text style={styles.title}>{title}</Text>

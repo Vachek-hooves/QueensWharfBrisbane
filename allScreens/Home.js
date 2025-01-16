@@ -74,6 +74,7 @@ const Home = () => {
             title={place.name}
             description={place.description}
             image={place.image}
+            id={place.id}
           />
         ))}
       </ScrollView>
