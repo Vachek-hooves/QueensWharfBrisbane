@@ -9,6 +9,7 @@ import {
 import React, {useState, useEffect} from 'react';
 import {useAppStore} from '../store/context';
 import MainLayout from '../components/latout/MainLayout';
+import PlaceCard from '../components/homeComponents/PlaceCard';
 
 const Home = () => {
   const {places} = useAppStore();
@@ -34,7 +35,9 @@ const Home = () => {
             <Text style={styles.timeText}>
               {currentTime.getHours().toString().padStart(2, '0')}
             </Text>
-            <Text style={styles.ampm}>AM</Text>
+            <Text style={styles.ampm}>
+              {currentTime.getHours() >= 12 ? 'PM' : 'AM'}
+            </Text>
           </View>
           <View style={styles.timeBox}>
             <Text style={styles.timeText}>
@@ -63,6 +66,15 @@ const Home = () => {
             <Text style={styles.sectionLink}>All ›</Text>
           </View>
         </View>
+
+        {places.slice(0, 5).map(place => (
+          <PlaceCard
+            key={place.id}
+            title={place.name}
+            description={place.description}
+            image={place.image}
+          />
+        ))}
       </ScrollView>
     </MainLayout>
   );
@@ -75,6 +87,7 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: '#000',
     padding: 20,
+    marginTop: 50,
   },
   title: {
     fontSize: 32,

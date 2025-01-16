@@ -1,0 +1,50 @@
+import React from 'react';
+import {StyleSheet, View, Text, Image, TouchableOpacity} from 'react-native';
+
+const PlaceCard = ({title, description, image}) => {
+  return (
+    <TouchableOpacity style={styles.card}>
+      <Image source={{uri: image}} style={styles.image} resizeMode="cover" />
+      <View style={styles.content}>
+        <Text style={styles.title}>{title}</Text>
+        <Text style={styles.description} numberOfLines={2}>
+          {description}
+        </Text>
+      </View>
+    </TouchableOpacity>
+  );
+};
+
+export default PlaceCard;
+
+const styles = StyleSheet.create({
+  card: {
+    backgroundColor: '#001F1F',
+    borderRadius: 12,
+    marginBottom: 15,
+    overflow: 'hidden',
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+  },
+  image: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+  },
+  content: {
+    flex: 1,
+    marginLeft: 15,
+  },
+  title: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 4,
+  },
+  description: {
+    color: '#666666',
+    fontSize: 14,
+    lineHeight: 20,
+  },
+});
