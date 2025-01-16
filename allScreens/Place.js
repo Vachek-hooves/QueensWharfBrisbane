@@ -161,7 +161,7 @@ const styles = StyleSheet.create({
     padding: 15,
     borderRadius: 25,
     position: 'absolute',
-    bottom: 40,
+    bottom: 140,
     left: 0,
     right: 0,
   },
