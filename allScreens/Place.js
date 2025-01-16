@@ -144,7 +144,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     padding: 15,
-    borderRadius: 15,
+    borderRadius: 32,
     marginBottom: 8,
     // borderWidth: 4,
     backgroundColor: '#00353C',
@@ -165,7 +165,7 @@ const styles = StyleSheet.create({
   },
   typeText: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: 18,
   },
   selectedTypeText: {
     color: '#FFFFFF',
