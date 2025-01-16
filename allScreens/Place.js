@@ -10,9 +10,8 @@ import {
 import {useAppStore} from '../store/context';
 
 const Place = ({navigation}) => {
-  const {places, customPlaces} = useAppStore();
+  const {customPlaces} = useAppStore();
   const [selectedType, setSelectedType] = useState('Entertainment');
-  console.log(customPlaces);
 
   // Define fixed categories
   const types = ['Entertainment', 'Restaurants', 'Walking', 'Attractions'];
@@ -30,6 +29,10 @@ const Place = ({navigation}) => {
       navigation.navigate('CreatePlace', {category: selectedType});
     }
   };
+
+  const filteredPlaces = customPlaces.filter(
+    place => place.category === selectedType,
+  );
 
   return (
     <View style={styles.container}>
@@ -74,42 +77,46 @@ const Place = ({navigation}) => {
         ))}
       </ScrollView>
 
-      {/* Next Button */}
-      <TouchableOpacity style={styles.nextButton} onPress={handleNext}>
-        <Text style={styles.nextButtonText}>Next</Text>
+      {/* Places List */}
+      <ScrollView style={styles.placesContainer}>
+        {filteredPlaces.map(place => (
+          <TouchableOpacity
+            key={place.id}
+            style={styles.placeCard}
+            onPress={() => navigation.navigate('PlaceDetails', {place})}>
+            <Image source={{uri: place.image}} style={styles.placeImage} />
+            <View style={styles.placeInfo}>
+              <Text style={styles.placeName}>{place.name}</Text>
+              <Text style={styles.placeDescription} numberOfLines={2}>
+                {place.description}
+              </Text>
+            </View>
+          </TouchableOpacity>
+        ))}
+      </ScrollView>
+
+      {/* Add Place Button */}
+      <TouchableOpacity
+        style={styles.addButton}
+        onPress={() => navigation.navigate('CreatePlace')}>
+        <Text style={styles.addButtonText}>Add Place</Text>
       </TouchableOpacity>
     </View>
   );
 };
-
-export default Place;
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#000000',
   },
-  header: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingHorizontal: 20,
-    paddingTop: 60,
-    paddingBottom: 20,
-  },
-  backButton: {
-    width: 40,
-    height: 40,
-    justifyContent: 'center',
-  },
-  backIcon: {
-    color: '#00AAB8',
-    fontSize: 24,
-  },
   headerTitle: {
     color: '#FFFFFF',
     fontSize: 24,
     fontWeight: 'bold',
-    marginLeft: 10,
+    textAlign: 'center',
+    marginTop: 60,
+    marginBottom: 20,
   },
   typesContainer: {
     maxHeight: 70,
@@ -120,25 +127,14 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 20,
-    paddingVertical: 15,
+    paddingVertical: 10,
     marginRight: 10,
-    borderRadius: 15,
-    backgroundColor: '#00353C',
-    minWidth: 150,
+    borderRadius: 20,
+    backgroundColor: '#00181C',
+    gap: 10,
   },
   selectedTypeButton: {
-    backgroundColor: '#00353C',
-    borderWidth: 4,
-    borderColor: '#00AAB8',
-  },
-  typeIcon: {
-    width: 24,
-    height: 24,
-    marginRight: 10,
-    tintColor: '#666666',
-  },
-  selectedTypeIcon: {
-    tintColor: '#FFFFFF',
+    backgroundColor: '#00181C',
   },
   typeText: {
     color: '#666666',
@@ -146,11 +142,43 @@ const styles = StyleSheet.create({
   },
   selectedTypeText: {
     color: '#FFFFFF',
-    fontWeight: 'bold',
   },
-  nextButton: {
+  placesContainer: {
+    flex: 1,
+    paddingHorizontal: 20,
+    marginTop: 20,
+  },
+  placeCard: {
+    flexDirection: 'row',
+    backgroundColor: '#00181C',
+    borderRadius: 15,
+    padding: 15,
+    marginBottom: 15,
+  },
+  placeImage: {
+    width: 80,
+    height: 80,
+    borderRadius: 40,
+  },
+  placeInfo: {
+    flex: 1,
+    marginLeft: 15,
+  },
+  placeName: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  placeDescription: {
+    color: '#666666',
+    fontSize: 14,
+    lineHeight: 20,
+  },
+  addButton: {
     backgroundColor: '#00AAB8',
     marginHorizontal: 20,
+    marginVertical: 20,
     padding: 15,
     borderRadius: 25,
     position: 'absolute',
@@ -158,10 +186,12 @@ const styles = StyleSheet.create({
     left: 0,
     right: 0,
   },
-  nextButtonText: {
+  addButtonText: {
     color: '#FFFFFF',
-    fontSize: 16,
+    fontSize: 20,
     fontWeight: 'bold',
     textAlign: 'center',
   },
 });
+
+export default Place;
