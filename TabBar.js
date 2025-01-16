@@ -1,0 +1,80 @@
+import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
+import React from 'react';
+
+const TabBar = ({navigation, activeRoute}) => {
+  return (
+    <View style={styles.navbar}>
+      <TouchableOpacity 
+        style={styles.navItem}
+        onPress={() => navigation.navigate('Home')}
+      >
+        <Image 
+          source={require('../assets/icons/home.png')} 
+          style={[styles.navIcon, activeRoute === 'Home' && styles.activeNav]} 
+        />
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={styles.navItem}
+        onPress={() => navigation.navigate('Map')}
+      >
+        <Image 
+          source={require('../assets/icons/map.png')} 
+          style={[styles.navIcon, activeRoute === 'Map' && styles.activeNav]} 
+        />
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={styles.navItem}
+        onPress={() => navigation.navigate('Places')}
+      >
+        <Image 
+          source={require('../assets/icons/location.png')} 
+          style={[styles.navIcon, activeRoute === 'Places' && styles.activeNav]} 
+        />
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={styles.navItem}
+        onPress={() => navigation.navigate('Trips')}
+      >
+        <Image 
+          source={require('../assets/icons/suitcase.png')} 
+          style={[styles.navIcon, activeRoute === 'Trips' && styles.activeNav]} 
+        />
+      </TouchableOpacity>
+      <TouchableOpacity 
+        style={styles.navItem}
+        onPress={() => navigation.navigate('Settings')}
+      >
+        <Image 
+          source={require('../assets/icons/settings.png')} 
+          style={[styles.navIcon, activeRoute === 'Settings' && styles.activeNav]} 
+        />
+      </TouchableOpacity>
+    </View>
+  );
+};
+
+export default TabBar;
+
+const styles = StyleSheet.create({
+  navbar: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    backgroundColor: '#001F1F',
+    borderRadius: 25,
+    padding: 15,
+    marginTop: 20,
+    marginHorizontal: 20,
+    position: 'absolute',
+    bottom: 30,
+    left: 0,
+    right: 0,
+  },
+  navIcon: {
+    width: 24,
+    height: 24,
+    tintColor: '#666',
+  },
+  activeNav: {
+    tintColor: '#00FFFF',
+  },
+});
