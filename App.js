@@ -7,8 +7,9 @@ function App() {
   return (
     <ContextProvider>
       <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="WelcomeAppScreen" component={WellcomeAppScreen} />
+        <Stack.Navigator screenOptions={{headerShown: false}}>
+          <Stack.Screen name="WelcomeAppScreen" component={WellcomeAppScreen} />
+          
         </Stack.Navigator>
       </NavigationContainer>
     </ContextProvider>
