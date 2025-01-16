@@ -1,6 +1,15 @@
-import {StyleSheet, Text, View, Image, ScrollView, TouchableOpacity} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ScrollView,
+  TouchableOpacity,
+  Dimensions,
+} from 'react-native';
 import React from 'react';
 import {useAppStore} from '../store/context';
+import MapView, {Marker} from 'react-native-maps';
 
 const PlaceCardDetails = ({route, navigation}) => {
   const {places} = useAppStore();
@@ -15,10 +24,9 @@ const PlaceCardDetails = ({route, navigation}) => {
     <View style={styles.container}>
       {/* Header */}
       <View style={styles.header}>
-        <TouchableOpacity 
-          onPress={() => navigation.goBack()} 
-          style={styles.backButton}
-        >
+        <TouchableOpacity
+          onPress={() => navigation.goBack()}
+          style={styles.backButton}>
           <Text style={styles.backIcon}>{'<'}</Text>
         </TouchableOpacity>
         <Text style={styles.headerTitle} numberOfLines={1}>
@@ -29,8 +37,8 @@ const PlaceCardDetails = ({route, navigation}) => {
       <ScrollView style={styles.scrollView}>
         {/* Main Image */}
         <View style={styles.imageContainer}>
-          <Image 
-            source={{uri: place.image}} 
+          <Image
+            source={{uri: place.image}}
             style={styles.mainImage}
             resizeMode="cover"
           />
@@ -41,11 +49,9 @@ const PlaceCardDetails = ({route, navigation}) => {
           {/* Title and Location */}
           <Text style={styles.title}>{place.name}</Text>
           <Text style={styles.subtitle}>{place.place}</Text>
-          
+
           {/* Description Quote */}
-          <Text style={styles.quote}>
-            «{place.description}»
-          </Text>
+          <Text style={styles.quote}>«{place.description}»</Text>
 
           {/* Category and Opening Hours */}
           <View style={styles.infoSection}>
@@ -55,7 +61,7 @@ const PlaceCardDetails = ({route, navigation}) => {
                 {place.category}
               </Text>
             )}
-            
+
             {place.openingHours && (
               <Text style={styles.infoText}>
                 <Text style={styles.infoLabel}>Opening Hours: </Text>
@@ -76,7 +82,7 @@ const PlaceCardDetails = ({route, navigation}) => {
             </View>
           )}
 
-          {/* Location */}
+          {/* Location Section with Map */}
           <View style={styles.locationSection}>
             <Text style={styles.infoLabel}>Location:</Text>
             <Text style={styles.locationText}>
@@ -85,6 +91,27 @@ const PlaceCardDetails = ({route, navigation}) => {
             <Text style={styles.locationText}>
               Longitude: {place.location.longitude}
             </Text>
+
+            {/* Map View */}
+            <View style={styles.mapContainer}>
+              <MapView
+                style={styles.map}
+                initialRegion={{
+                  latitude: place.location.latitude,
+                  longitude: place.location.longitude,
+                  latitudeDelta: 0.01,
+                  longitudeDelta: 0.01,
+                }}>
+                <Marker
+                  coordinate={{
+                    latitude: place.location.latitude,
+                    longitude: place.location.longitude,
+                  }}
+                  title={place.name}
+                  description={place.place}
+                />
+              </MapView>
+            </View>
           </View>
         </View>
       </ScrollView>
@@ -193,5 +220,15 @@ const styles = StyleSheet.create({
     lineHeight: 24,
     marginLeft: 16,
     marginBottom: 4,
+  },
+  mapContainer: {
+    marginTop: 15,
+    borderRadius: 12,
+    overflow: 'hidden',
+    height: 200,
+  },
+  map: {
+    width: '100%',
+    height: '100%',
   },
 });
