@@ -6,7 +6,8 @@ import {
   TouchableOpacity,
   Image,
   TextInput,
-  ScrollView,Modal
+  ScrollView,
+  Modal,
 } from 'react-native';
 import {useAppStore} from '../store/context';
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -32,7 +33,7 @@ const CreatePlaceForm = ({route, navigation}) => {
   });
   const [showTimePicker, setShowTimePicker] = useState(false);
   const [timePickerType, setTimePickerType] = useState('from');
-  console.log(isMapVisible)
+  console.log(isMapVisible);
 
   const handleAddConvenience = () => {
     if (newConvenience.trim()) {
@@ -78,7 +79,9 @@ const CreatePlaceForm = ({route, navigation}) => {
       <ScrollView style={styles.content}>
         <View style={styles.formContainer}>
           {/* Image Picker */}
-          <TouchableOpacity style={styles.imagePickerButton} onPress={handleImagePick}>
+          <TouchableOpacity
+            style={styles.imagePickerButton}
+            onPress={handleImagePick}>
             <View style={styles.imagePlaceholder}>
               {image ? (
                 <Image source={{uri: image}} style={styles.selectedImage} />
@@ -97,13 +100,17 @@ const CreatePlaceForm = ({route, navigation}) => {
             placeholder="Place Name"
             placeholderTextColor="#666666"
             value={formData.placeName}
-            onChangeText={(text) => setFormData({...formData, placeName: text})}
+            onChangeText={text => setFormData({...formData, placeName: text})}
           />
 
           <TouchableOpacity
             style={styles.input}
             onPress={() => setIsMapVisible(true)}>
-            <Text style={[styles.inputText, !formData.location && styles.placeholder]}>
+            <Text
+              style={[
+                styles.inputText,
+                !formData.location && styles.placeholder,
+              ]}>
               {formData.location || 'Location'}
             </Text>
           </TouchableOpacity>
@@ -113,7 +120,7 @@ const CreatePlaceForm = ({route, navigation}) => {
             placeholder="Description"
             placeholderTextColor="#666666"
             value={formData.description}
-            onChangeText={(text) => setFormData({...formData, description: text})}
+            onChangeText={text => setFormData({...formData, description: text})}
             multiline
           />
 
@@ -126,7 +133,11 @@ const CreatePlaceForm = ({route, navigation}) => {
                   setTimePickerType('from');
                   setShowTimePicker(true);
                 }}>
-                <Text style={[styles.inputText, !workingHours.from && styles.placeholder]}>
+                <Text
+                  style={[
+                    styles.inputText,
+                    !workingHours.from && styles.placeholder,
+                  ]}>
                   {workingHours.from || 'From'}
                 </Text>
               </TouchableOpacity>
@@ -136,7 +147,11 @@ const CreatePlaceForm = ({route, navigation}) => {
                   setTimePickerType('to');
                   setShowTimePicker(true);
                 }}>
-                <Text style={[styles.inputText, !workingHours.to && styles.placeholder]}>
+                <Text
+                  style={[
+                    styles.inputText,
+                    !workingHours.to && styles.placeholder,
+                  ]}>
                   {workingHours.to || 'To'}
                 </Text>
               </TouchableOpacity>
@@ -183,32 +198,37 @@ const CreatePlaceForm = ({route, navigation}) => {
       </TouchableOpacity>
 
       <Modal
-        isVisible={isMapVisible}
-        style={styles.mapModal}
-        onBackdropPress={() => setIsMapVisible(false)}>
-        <View style={styles.mapContainer}>
-          <MapView
-            style={styles.map}
-            initialRegion={{
-              latitude: -27.47,
-              longitude: 153.02,
-              latitudeDelta: 0.0922,
-              longitudeDelta: 0.0421,
-            }}
-            onPress={(e) => setSelectedLocation(e.nativeEvent.coordinate)}>
-            {selectedLocation && <Marker coordinate={selectedLocation} />}
-          </MapView>
-          <TouchableOpacity
-            style={styles.confirmLocationButton}
-            onPress={() => {
-              setFormData({
-                ...formData,
-                location: `${selectedLocation.latitude}, ${selectedLocation.longitude}`,
-              });
-              setIsMapVisible(false);
-            }}>
-            <Text style={styles.confirmLocationText}>Confirm Location</Text>
-          </TouchableOpacity>
+        visible={isMapVisible}
+        transparent={true}
+        animationType="slide"
+        onRequestClose={() => setIsMapVisible(false)}>
+        <View style={styles.modalOverlay}>
+          <View style={styles.mapContainer}>
+            <MapView
+              style={styles.map}
+              initialRegion={{
+                latitude: -27.47,
+                longitude: 153.02,
+                latitudeDelta: 0.0922,
+                longitudeDelta: 0.0421,
+              }}
+              onPress={e => setSelectedLocation(e.nativeEvent.coordinate)}>
+              {selectedLocation && <Marker coordinate={selectedLocation} />}
+            </MapView>
+            <TouchableOpacity
+              style={styles.confirmLocationButton}
+              onPress={() => {
+                if (selectedLocation) {
+                  setFormData({
+                    ...formData,
+                    location: `${selectedLocation.latitude}, ${selectedLocation.longitude}`,
+                  });
+                  setIsMapVisible(false);
+                }
+              }}>
+              <Text style={styles.confirmLocationText}>Confirm Location</Text>
+            </TouchableOpacity>
+          </View>
         </View>
       </Modal>
 
@@ -222,9 +242,8 @@ const CreatePlaceForm = ({route, navigation}) => {
             <Text style={styles.timePickerTitle}>
               Select {timePickerType === 'from' ? 'Opening' : 'Closing'} Time
             </Text>
-            
+
             <View style={styles.timePickerContent}>
-       
               <ScrollView style={styles.timeColumn}>
                 {Array.from({length: 24}, (_, i) => {
                   const hour = i.toString().padStart(2, '0');
@@ -369,7 +388,7 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
   },
   mapContainer: {
-    height: '80%',
+    height: '100%',
     backgroundColor: '#00181C',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
