@@ -84,6 +84,19 @@ export const ContextProvider = ({children}) => {
     }
   };
 
+  // Add deleteTrip function to AppProvider
+  const deleteTrip = async (tripId) => {
+    try {
+      const updatedTrips = trips.filter(trip => trip.id !== tripId);
+      await AsyncStorage.setItem('trips', JSON.stringify(updatedTrips));
+      setTrips(updatedTrips);
+      return true;
+    } catch (error) {
+      console.error('Error deleting trip:', error);
+      return false;
+    }
+  };
+
   const value = {
     places,
     customPlaces,
@@ -91,6 +104,7 @@ export const ContextProvider = ({children}) => {
     addPlace,
     trips,
     saveTrip,
+    deleteTrip,
   };
 
   return (
