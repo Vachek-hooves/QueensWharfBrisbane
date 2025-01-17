@@ -1,6 +1,6 @@
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import {NavigationContainer} from '@react-navigation/native';
-import {Home, WellcomeAppScreen} from './allScreens';
+import {AddTrip, Home, WellcomeAppScreen} from './allScreens';
 import {ContextProvider} from './store/context';
 import NavigationMenu from './NavigationMenu';
 import PlaceCardDetails from './allScreens/PlaceCardDetails';
@@ -19,6 +19,7 @@ function App() {
           <Stack.Screen name="CreatePlace" component={CreatePlace} />
           <Stack.Screen name="CreatePlaceForm" component={CreatePlaceForm} />
           <Stack.Screen name="PlaceDetails" component={PlaceDetails} />
+          <Stack.Screen name="AddTrip" component={AddTrip} />
         </Stack.Navigator>
       </NavigationContainer>
     </ContextProvider>
