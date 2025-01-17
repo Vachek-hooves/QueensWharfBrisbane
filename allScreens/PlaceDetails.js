@@ -33,40 +33,41 @@ const PlaceDetails = ({route, navigation}) => {
           <Image source={{uri: place.image}} style={styles.placeImage} />
         </View>
         {/* Image */}
-<View style={styles.content}>
-        {/* Category Badge */}
-        <View style={styles.categoryContainer}>
-          <Text style={styles.categoryText}>{place.category}</Text>
-        </View>
-
-        {/* Details */}
-        <View style={styles.detailsContainer}>
-          {/* Place Name */}
-          <Text style={styles.label}>Place Name</Text>
-          <Text style={styles.value}>{place.name}</Text>
-
-          {/* Location */}
-          <Text style={styles.label}>Location</Text>
-          <Text style={styles.value}>{place.location}</Text>
-
-          {/* Description */}
-          <Text style={styles.label}>Description</Text>
-          <Text style={styles.value}>{place.description}</Text>
-
-          {/* Working Hours */}
-          <Text style={styles.label}>Working hours</Text>
-          <Text style={styles.value}>{place.workingHours}</Text>
-
-          {/* Conveniences */}
-          <Text style={styles.label}>Conveniences</Text>
-          <View style={styles.conveniencesContainer}>
-            {place.conveniences.map((item, index) => (
-              <View key={index} style={styles.convenienceItem}>
-                <Text style={styles.convenienceText}>{item}</Text>
-              </View>
-            ))}
+        <View style={styles.content}>
+          {/* Category Badge */}
+          <View style={styles.categoryContainer}>
+            <Text style={styles.categoryText}>{place.category}</Text>
           </View>
-        </View></View>
+
+          {/* Details */}
+          <View style={styles.detailsContainer}>
+            {/* Place Name */}
+            <Text style={styles.label}>Place Name</Text>
+            <Text style={styles.value}>{place.name}</Text>
+
+            {/* Location */}
+            <Text style={styles.label}>Location</Text>
+            <Text style={styles.value}>{place.location}</Text>
+
+            {/* Description */}
+            <Text style={styles.label}>Description</Text>
+            <Text style={styles.value}>{place.description}</Text>
+
+            {/* Working Hours */}
+            <Text style={styles.label}>Working hours</Text>
+            <Text style={styles.value}>{place.workingHours}</Text>
+
+            {/* Conveniences */}
+            <Text style={styles.label}>Conveniences</Text>
+            <View style={styles.conveniencesContainer}>
+              {place.conveniences.map((item, index) => (
+                <View key={index} style={styles.convenienceItem}>
+                  <Text style={styles.convenienceText}>{item}</Text>
+                </View>
+              ))}
+            </View>
+          </View>
+        </View>
       </ScrollView>
     </View>
   );
@@ -109,13 +110,11 @@ const styles = StyleSheet.create({
     borderRadius: 20,
     padding: 20,
     paddingTop: 120, // Extra padding to account for image overlap
-   
   },
   imageContainer: {
     alignItems: 'center',
     zIndex: 2,
     marginBottom: -100,
-
   },
   placeImage: {
     width: 200,
@@ -124,20 +123,19 @@ const styles = StyleSheet.create({
   },
   categoryContainer: {
     alignSelf: 'flex-start',
-    backgroundColor: '#00353C',
+    backgroundColor: '#00AAB8',
     paddingHorizontal: 20,
-    paddingVertical: 10,
-    borderRadius: 20,
+    paddingVertical: 15,
+    borderRadius: 26,
     marginLeft: 20,
     marginBottom: 20,
   },
   categoryText: {
-    color: '#FFFFFF',
-    fontSize: 16,
+    // color: '#FFFFFF',
+    fontSize: 18,
   },
   detailsContainer: {
     paddingHorizontal: 10,
-    
   },
   label: {
     color: '#666666',
@@ -148,6 +146,7 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontSize: 16,
     marginBottom: 20,
+    fontWeight: 'bold',
   },
   conveniencesContainer: {
     flexDirection: 'row',
@@ -164,7 +163,7 @@ const styles = StyleSheet.create({
   },
   convenienceText: {
     color: '#FFFFFF',
-    fontSize: 14,
+    fontSize: 16,
   },
 });
 
