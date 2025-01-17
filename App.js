@@ -8,6 +8,7 @@ import CreatePlace from './allScreens/CreatePlace';
 import CreatePlaceForm from './allScreens/CreatePlaceForm';
 import PlaceDetails from './allScreens/PlaceDetails';
 import AddTripForm from './allScreens/AddTripForm';
+import TripDetails from './allScreens/TripDetails';
 const Stack = createNativeStackNavigator();
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
           <Stack.Screen name="PlaceDetails" component={PlaceDetails} />
           <Stack.Screen name="AddTrip" component={AddTrip} />
           <Stack.Screen name="AddTripForm" component={AddTripForm} />
+          <Stack.Screen name="TripDetails" component={TripDetails} />
         </Stack.Navigator>
       </NavigationContainer>
     </ContextProvider>

@@ -52,12 +52,19 @@ const Trips = ({navigation}) => {
           </View>
         </View>
       ) : (
+        <View>
         <FlatList
           data={trips}
           renderItem={renderTrip}
           keyExtractor={item => item.id}
           contentContainerStyle={styles.tripsList}
         />
+        <TouchableOpacity
+              style={styles.addButton}
+              onPress={() => navigation.navigate('AddTrip')}>
+              <Text style={styles.addButtonText}>Add Trip</Text>
+            </TouchableOpacity>
+        </View>
       )}
     </View>
   );
@@ -115,6 +122,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderRadius: 25,
     minWidth: '90%',
+    marginHorizontal:20
   },
   addButtonText: {
     color: '#FFFFFF',
