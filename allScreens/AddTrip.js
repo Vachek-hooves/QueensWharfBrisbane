@@ -67,7 +67,7 @@ const AddTrip = ({navigation}) => {
         disabled={!selectedType}
         onPress={() => {
           if (selectedType) {
-            navigation.navigate('AddTripDetails', {tripType: selectedType});
+            navigation.navigate('AddTripForm', {tripType: selectedType});
           }
         }}>
         <Text style={styles.nextButtonText}>Next</Text>
