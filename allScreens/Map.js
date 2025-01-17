@@ -9,14 +9,6 @@ const Map = () => {
   const {places} = useAppStore();
   const navigation = useNavigation();
 
-  // Brisbane center coordinates
-  // const initialRegion = {
-  //   latitude: -27.47,
-  //   longitude: 153.02,
-  //   latitudeDelta: 0.1,
-  //   longitudeDelta: 0.1,
-  // };
-
   const handleMarkerPress = placeId => {
     navigation.navigate('PlaceCardDetails', {placeId});
   };

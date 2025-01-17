@@ -198,7 +198,7 @@ const AddTripForm = ({route, navigation}) => {
               </View>
             </TouchableOpacity>
 
-            <View style={styles.reminderContainer}>
+            {/* <View style={styles.reminderContainer}>
               <Text style={styles.reminderText}>Reminder</Text>
               <TouchableOpacity
                 style={[styles.switch, reminder && styles.switchActive]}
@@ -210,7 +210,7 @@ const AddTripForm = ({route, navigation}) => {
                   ]}
                 />
               </TouchableOpacity>
-            </View>
+            </View> */}
           </View>
         </ScrollView>
       </View>

@@ -8,6 +8,7 @@ import {
   TextInput,
   Alert,
   ScrollView,
+  Linking,
 } from 'react-native';
 import {useAppStore} from '../store/context';
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -45,6 +46,10 @@ const Settings = () => {
       setEditedData(userData); // Reset to original data if canceling
     }
     setIsEditing(!isEditing);
+  };
+
+  const seePrivacyPolicy = () => {
+    Linking.openURL('https://www.termsfeed.com/live/9d179efe-2092-4304-85c6-bef862da7249');
   };
 
   return (
@@ -99,15 +104,15 @@ const Settings = () => {
 
         {/* Menu Items */}
         <View style={styles.menuContainer}>
-          <TouchableOpacity style={styles.menuItem}>
+          {/* <TouchableOpacity style={styles.menuItem}>
             <Text style={styles.menuText}>Developer Website</Text>
             <Image
               source={require('../assets/icons/arrow-right.png')}
               style={styles.arrowIcon}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
-          <TouchableOpacity style={styles.menuItem}>
+          <TouchableOpacity style={styles.menuItem} onPress={seePrivacyPolicy}>
             <Text style={styles.menuText}>Privacy Policy</Text>
             <Image
               source={require('../assets/icons/arrow-right.png')}
@@ -115,13 +120,13 @@ const Settings = () => {
             />
           </TouchableOpacity>
 
-          <TouchableOpacity style={styles.menuItem}>
+          {/* <TouchableOpacity style={styles.menuItem}>
             <Text style={styles.menuText}>Terms of Use</Text>
             <Image
               source={require('../assets/icons/arrow-right.png')}
               style={styles.arrowIcon}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
       </ScrollView>
       <View style={{height: 100}} />
