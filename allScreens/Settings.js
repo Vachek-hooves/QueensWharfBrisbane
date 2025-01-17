@@ -97,13 +97,13 @@ const Settings = () => {
 
         {/* Menu Items */}
         <View style={styles.menuContainer}>
-          <TouchableOpacity style={styles.menuItem}>
+          {/* <TouchableOpacity style={styles.menuItem}>
             <Text style={styles.menuText}>Developer Website</Text>
             <Image
               source={require('../assets/icons/arrow-right.png')}
               style={styles.arrowIcon}
             />
-          </TouchableOpacity>
+          </TouchableOpacity> */}
 
           <TouchableOpacity style={styles.menuItem}>
             <Text style={styles.menuText}>Privacy Policy</Text>
@@ -158,7 +158,7 @@ const styles = StyleSheet.create({
   },
   editImageButton: {
     position: 'absolute',
-    right: '30%',
+    right: '20%',
     top: 0,
     backgroundColor: '#00AAB8',
     padding: 10,
