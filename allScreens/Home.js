@@ -36,9 +36,9 @@ const Home = () => {
             <Text style={styles.timeText}>
               {currentTime.getHours().toString().padStart(2, '0')}
             </Text>
-            <Text style={styles.ampm}>
+            {/* <Text style={styles.ampm}>
               {currentTime.getHours() >= 12 ? 'PM' : 'AM'}
-            </Text>
+            </Text> */}
           </View>
           <View style={styles.timeBox}>
             <Text style={styles.timeText}>
@@ -46,7 +46,7 @@ const Home = () => {
             </Text>
           </View>
           <View style={styles.weatherBox}>
-            <Text style={styles.temperature}>24°</Text>
+            <Text style={styles.temperature}>26°</Text>
             <View>
               <Text style={styles.city}>Brisbane</Text>
               <Text style={styles.country}>Australia</Text>
@@ -55,17 +55,17 @@ const Home = () => {
         </View>
 
         {/* People Section */}
-        <TouchableOpacity style={styles.sectionHeader}>
+        {/* <TouchableOpacity style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>People</Text>
           <Text style={styles.sectionArrow}>›</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
 
         {/* News Section */}
         <View style={styles.newsSection}>
-          <View style={styles.sectionHeader}>
+          {/* <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>News</Text>
             <Text style={styles.sectionLink}>All ›</Text>
-          </View>
+          </View> */}
         </View>
 
         {places.map(place => (
@@ -124,7 +124,7 @@ const styles = StyleSheet.create({
     borderRadius: 12,
     padding: 15,
     flex: 1,
-    flexDirection: 'row',
+    // flexDirection: 'row',
     alignItems: 'center',
   },
   temperature: {

@@ -134,81 +134,85 @@ const AddTripForm = ({route, navigation}) => {
             </View>
           )}
         </TouchableOpacity>
+        <ScrollView>
+          {/* Form Fields */}
+          <View style={styles.form}>
+            <TextInput
+              style={styles.input}
+              placeholder="Name of the trip"
+              placeholderTextColor="#666666"
+              value={formData.name}
+              onChangeText={text => setFormData({...formData, name: text})}
+            />
 
-        {/* Form Fields */}
-        <View style={styles.form}>
-          <TextInput
-            style={styles.input}
-            placeholder="Name of the trip"
-            placeholderTextColor="#666666"
-            value={formData.name}
-            onChangeText={text => setFormData({...formData, name: text})}
-          />
+            <TextInput
+              style={styles.input}
+              placeholder="Place"
+              placeholderTextColor="#666666"
+              value={formData.place}
+              onChangeText={text => setFormData({...formData, place: text})}
+            />
 
-          <TextInput
-            style={styles.input}
-            placeholder="Place"
-            placeholderTextColor="#666666"
-            value={formData.place}
-            onChangeText={text => setFormData({...formData, place: text})}
-          />
+            <TextInput
+              style={styles.input}
+              placeholder="Budget"
+              placeholderTextColor="#666666"
+              keyboardType="numeric"
+              value={formData.budget}
+              onChangeText={text => setFormData({...formData, budget: text})}
+            />
 
-          <TextInput
-            style={styles.input}
-            placeholder="Budget"
-            placeholderTextColor="#666666"
-            keyboardType="numeric"
-            value={formData.budget}
-            onChangeText={text => setFormData({...formData, budget: text})}
-          />
-
-          <TouchableOpacity
-            style={styles.input}
-            onPress={() => setShowCalendar(true)}>
-            <View style={styles.inputWithIcon}>
-              {/* <Image
+            <TouchableOpacity
+              style={styles.input}
+              onPress={() => setShowCalendar(true)}>
+              <View style={styles.inputWithIcon}>
+                {/* <Image
                 source={require('../assets/icons/calendar.png')}
                 style={styles.inputIcon}
               /> */}
-              <Text
-                style={[
-                  styles.inputText,
-                  !formData.date && styles.placeholder,
-                ]}>
-                {formData.date || 'Date'}
-              </Text>
-            </View>
-          </TouchableOpacity>
+                <Text
+                  style={[
+                    styles.inputText,
+                    !formData.date && styles.placeholder,
+                  ]}>
+                  {formData.date || 'Date'}
+                </Text>
+              </View>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.input}
-            onPress={() => setShowTimePicker(true)}>
-            <View style={styles.inputWithIcon}>
-              {/* <Image
+            <TouchableOpacity
+              style={styles.input}
+              onPress={() => setShowTimePicker(true)}>
+              <View style={styles.inputWithIcon}>
+                {/* <Image
                 source={require('../assets/icons/clock.png')}
                 style={styles.inputIcon}
               /> */}
-              <Text
-                style={[
-                  styles.inputText,
-                  !formData.time && styles.placeholder,
-                ]}>
-                {formData.time || 'Time'}
-              </Text>
-            </View>
-          </TouchableOpacity>
-
-          <View style={styles.reminderContainer}>
-            <Text style={styles.reminderText}>Reminder</Text>
-            <TouchableOpacity
-              style={[styles.switch, reminder && styles.switchActive]}
-              onPress={() => setReminder(!reminder)}>
-              <View
-                style={[styles.switchKnob, reminder && styles.switchKnobActive]}
-              />
+                <Text
+                  style={[
+                    styles.inputText,
+                    !formData.time && styles.placeholder,
+                  ]}>
+                  {formData.time || 'Time'}
+                </Text>
+              </View>
             </TouchableOpacity>
+
+            <View style={styles.reminderContainer}>
+              <Text style={styles.reminderText}>Reminder</Text>
+              <TouchableOpacity
+                style={[styles.switch, reminder && styles.switchActive]}
+                onPress={() => setReminder(!reminder)}>
+                <View
+                  style={[
+                    styles.switchKnob,
+                    reminder && styles.switchKnobActive,
+                  ]}
+                />
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
+        </ScrollView>
       </View>
 
       {/* Calendar Modal */}
@@ -453,10 +457,11 @@ const styles = StyleSheet.create({
   },
   doneButton: {
     marginHorizontal: 20,
-    marginBottom: 40,
+    marginBottom: 20,
     padding: 15,
     borderRadius: 25,
     alignItems: 'center',
+    marginTop: 10,
   },
   doneButtonActive: {
     backgroundColor: '#00AAB8',

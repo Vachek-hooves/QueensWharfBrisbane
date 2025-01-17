@@ -124,6 +124,7 @@ const Settings = () => {
           </TouchableOpacity>
         </View>
       </ScrollView>
+      <View style={{height: 100}} />
     </View>
   );
 };

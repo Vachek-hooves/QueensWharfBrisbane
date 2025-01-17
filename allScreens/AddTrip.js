@@ -28,36 +28,40 @@ const AddTrip = ({navigation}) => {
         <Text style={styles.headerTitle}>Add Trip</Text>
       </View>
 
-      <View style={styles.content}>
-        {/* Plane Icon */}
-        <Image
-          source={require('../assets/icons/plane.png')}
-          style={styles.planeIcon}
-        />
+      <ScrollView
+        contentContainerStyle={{borderRadius: 20}}
+        showsVerticalScrollIndicator={false}>
+        <View style={styles.content}>
+          {/* Plane Icon */}
+          <Image
+            source={require('../assets/icons/plane.png')}
+            style={styles.planeIcon}
+          />
 
-        {/* Trip Type Selection */}
-        <Text style={styles.sectionTitle}>Type of trip</Text>
-        <View style={styles.typeContainer}>
-          {tripTypes.map(type => (
-            <TouchableOpacity
-              key={type}
-              style={[
-                styles.typeButton,
-                selectedType === type && styles.selectedTypeButton,
-              ]}
-              onPress={() => setSelectedType(type)}>
-              <Text
+          {/* Trip Type Selection */}
+          <Text style={styles.sectionTitle}>Type of trip</Text>
+          <View style={styles.typeContainer}>
+            {tripTypes.map(type => (
+              <TouchableOpacity
+                key={type}
                 style={[
-                  styles.typeText,
-                  selectedType === type && styles.selectedTypeText,
-                ]}>
-                {type}
-              </Text>
-            </TouchableOpacity>
-          ))}
+                  styles.typeButton,
+                  selectedType === type && styles.selectedTypeButton,
+                ]}
+                onPress={() => setSelectedType(type)}>
+                <Text
+                  style={[
+                    styles.typeText,
+                    selectedType === type && styles.selectedTypeText,
+                  ]}>
+                  {type}
+                </Text>
+              </TouchableOpacity>
+            ))}
+          </View>
         </View>
-      </View>
-
+      </ScrollView>
+      <View style={{height: 29}} />
       {/* Next Button */}
       <TouchableOpacity
         style={[
@@ -137,7 +141,7 @@ const styles = StyleSheet.create({
   selectedTypeButton: {
     // backgroundColor: '#00AAB8',
     borderWidth: 4,
-    borderColor:'#00AAB8'
+    borderColor: '#00AAB8',
   },
   typeText: {
     color: '#FFFFFF',
@@ -149,12 +153,12 @@ const styles = StyleSheet.create({
   },
   nextButton: {
     marginHorizontal: 20,
-    marginBottom: 40,
+    marginBottom: 20,
     padding: 15,
     borderRadius: 25,
     alignItems: 'center',
-    position: 'absolute',
-    bottom: 50,
+    // position: 'absolute',
+    // bottom: 50,
     width: '90%',
   },
   nextButtonActive: {
