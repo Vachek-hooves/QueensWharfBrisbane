@@ -49,11 +49,12 @@ export const PLACES = [
       latitude: -27.477289843484485,
       longitude: 153.0268744610973,
     },
-    description: "Historic gardens established in 1855, featuring rare plants, ancient trees, and beautiful walking paths.",
+    description: "Queensland's oldest botanic gardens, established in 1855, showcasing a living museum of native and exotic plants. The gardens feature heritage-listed structures, including the Walter Hill Fountain and the Bamboo Grove. Visitors can enjoy guided walks, ornamental ponds, ancient trees, and the riverfront boardwalk. The gardens played a crucial role in Queensland's agricultural development, serving as a testing ground for crops like sugar cane and tobacco.",
     image: "https://upload.wikimedia.org/wikipedia/commons/thumb/e/e8/Alicestreet.jpg/640px-Alicestreet.jpg",
     category: "Nature",
-    amenities: ["Guided walks", "Rotunda", "Cycling paths", "River views"]
-    
+    amenities: ["Guided walks", "Rotunda", "Cycling paths", "River views"],
+    historicalSignificance: "First established as a testing ground for tropical crops",
+    bestTimeToVisit: "Early morning for bird watching and photography"
   },
   {
     id: 5,
@@ -63,10 +64,12 @@ export const PLACES = [
       latitude: -27.475623120464636,
       longitude: 153.02669858966502,
     },
-    description: "Brisbane's premier shopping destination with over 700 retailers, boutiques, and dining options.",
+    description: "The heart of Brisbane's shopping district, this vibrant pedestrian mall hosts over 700 retailers, from luxury brands to local boutiques. Home to major shopping centers like QueensPlaza and The Myer Centre. Regular live entertainment, fashion shows, and cultural events enliven the space. The mall's heritage-listed buildings blend seamlessly with modern architecture, creating a unique shopping atmosphere.",
     image: "https://studentone.com/wp-content/uploads/2018/03/Brisbane-City-Hall-2.png",
     category: "Shopping",
-    features: ["Shopping centers", "Street performers", "Food courts", "Designer stores"]
+    features: ["Shopping centers", "Street performers", "Food courts", "Designer stores"],
+    bestTimeToVisit: "Weekday mornings for quieter shopping",
+    historicalValue: "Originally opened in 1982 for the Commonwealth Games"
   },
   {
     id: 6,
@@ -76,10 +79,12 @@ export const PLACES = [
       latitude: -27.4709,
       longitude: 153.0170
     },
-    description: "Australia's largest gallery of modern and contemporary art, featuring local and international exhibitions.",
+    description: "Australia's largest gallery of modern and contemporary art, showcasing groundbreaking exhibitions from local and international artists. The striking architectural design complements South Bank's cultural precinct. Known for its interactive installations, children's art center, and innovative Australian Indigenous art collections. The gallery regularly hosts major international exhibitions and cultural events.",
     image: "https://upload.wikimedia.org/wikipedia/commons/1/1d/Streets_Beach_at_South_Bank_Parklands%2C_Brisbane_03.jpg",
     category: "Culture",
-    amenities: ["Cafe", "Gift shop", "Library", "Interactive exhibits"]
+    amenities: ["Cafe", "Gift shop", "Library", "Interactive exhibits"],
+    culturalSignificance: "Largest contemporary art gallery in Australia",
+    mustSee: "The Children's Art Centre and permanent Indigenous collections"
   },
   {
     id: 7,
@@ -89,10 +94,12 @@ export const PLACES = [
       latitude: -27.476199517779794,
       longitude: 153.02150483155756,
     },
-    description: "60-meter-tall observation wheel offering 360-degree views of the city in climate-controlled gondolas.",
+    description: "An iconic Ferris wheel offering breathtaking 360-degree views of Brisbane's skyline, South Bank, and the Brisbane River. Each fully enclosed, air-conditioned gondola provides an audio tour highlighting Brisbane's history and landmarks. Perfect for both day and night viewing, with special lighting effects creating a spectacular evening display. The 12-15 minute journey provides unique photo opportunities of the city.",
     image: "https://image-tc.galaxy.tf/wijpeg-5k5r1vnolg86qcyqg4ki9037v/istock-1136090319_standard.jpg?crop=70%2C0%2C1115%2C836",
     category: "Attractions",
-    duration: "12-15 minutes per ride"
+    duration: "12-15 minutes per ride",
+    bestTimeToVisit: "Sunset for spectacular city views",
+    features: ["Audio commentary", "Air-conditioned gondolas", "Night lighting"]
   },
   {
     id: 8,
@@ -102,10 +109,12 @@ export const PLACES = [
       latitude: -27.462382699286383,
       longitude: 153.0192037525158,
     },
-    description: "World's largest subtropical garden in a city center, featuring themed gardens and entertainment spaces.",
+    description: "A horticultural masterpiece spanning 16 hectares in the heart of Brisbane. Features themed gardens, including the spectacular Spectacle Garden with its ever-changing seasonal displays. The world's largest subtropical garden in a city center includes an amphitheater for performances, children's playgrounds, and electric bus tours. The parkland showcases over 1,800 species of plants and hosts regular community events.",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRpSJrxZqMNhELUZ3633Mnh9dvMxZpTBxthjA&s",
     category: "Parks & Recreation",
-    features: ["Amphitheatre", "Gardens", "Playground", "Guided tours"]
+    features: ["Amphitheatre", "Gardens", "Playground", "Guided tours"],
+    bestTimeToVisit: "Spring for maximum floral displays",
+    historicalValue: "Former site of Brisbane's first railway station"
   },
   {
     id: 9,
@@ -115,10 +124,12 @@ export const PLACES = [
       latitude: -27.46221477070657,
       longitude: 153.03485303131313,
     },
-    description: "Historic riverside precinct featuring restaurants, bars, hotel, and event spaces under the Story Bridge.",
+    description: "A revitalized heritage-listed wharf precinct beneath the Story Bridge, transformed into a vibrant entertainment and dining destination. The restored 1930s buildings house award-winning restaurants, craft breweries, and event spaces. Offering stunning river views and direct river access, it's become a popular spot for both locals and tourists. The precinct preserves Brisbane's maritime history while embracing modern hospitality.",
     image: "https://media.timeout.com/images/105810573/image.jpg",
     category: "Entertainment",
-    amenities: ["Restaurants", "Brewery", "Events space", "River views"]
+    amenities: ["Restaurants", "Brewery", "Events space", "River views"],
+    historicalSignificance: "Former commercial wharf from the 1930s",
+    bestTimeToVisit: "Evening for dining and city lights"
   },
   {
     id: 10,
@@ -128,270 +139,219 @@ export const PLACES = [
       latitude: -27.533077725782174,
       longitude: 152.96948016972334,
     },
-    description: "World's first and largest koala sanctuary, home to various Australian wildlife.",
+    description: "The world's first and largest koala sanctuary, established in 1927. Home to over 130 koalas and various native Australian wildlife. Visitors can hold koalas, feed kangaroos, and watch demonstrations of sheep dogs and birds of prey. The sanctuary plays a crucial role in koala conservation and research, offering educational programs and unique Australian wildlife experiences.",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRP8wLb_2Kj2SkupvcGvBXB41f3sPFWFaBbHg&s",
     category: "Wildlife",
-    activities: ["Koala holding", "Wildlife shows", "Bird feeding"]
+    activities: ["Koala holding", "Wildlife shows", "Bird feeding"],
+    conservation: "Leading research center for koala conservation",
+    bestTimeToVisit: "Early morning when animals are most active"
   },
   {
     id: 11,
     name: "Brisbane City Hall",
     place: "Brisbane CBD",
-    location: {
-      latitude: -27.468784449834455,
-      longitude: 153.0235897383305,
-    },
-    description: "Heritage-listed building with museum, clock tower tours, and grand auditorium.",
+    description: "An architectural masterpiece and the heart of Brisbane's civic life since 1930. This heritage-listed building features a stunning Italian Renaissance style design with its iconic clock tower offering panoramic city views. The Main Auditorium boasts one of Australia's grand organs and hosts numerous cultural events. The Museum of Brisbane, located on the top floor, presents fascinating exhibitions about the city's history and culture. Free guided tours reveal the building's architectural splendor and historical significance.",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTku5eTM2pzE1E2lawn90ZZnu_KTQiKvkMFlA&s",
     category: "Heritage",
-    yearBuilt: 1930
+    yearBuilt: 1930,
+    features: ["Clock Tower tours", "Museum of Brisbane", "Grand organ", "Guided tours"],
+    historicalSignificance: "Known as 'Brisbane's Living Room', symbol of civic pride"
   },
   {
     id: 12,
     name: "Kangaroo Point Cliffs",
     place: "Kangaroo Point",
-    location: {
-      latitude: -27.478263414752924,
-      longitude: 153.03395598352427,
-    },
-    description: "Popular spot for rock climbing and outdoor recreation with stunning river views.",
+    description: "Dramatic riverside cliffs formed from volcanic rock over 230 million years ago. A premier outdoor recreation destination offering both natural beauty and adventure activities. Popular among rock climbers and abseilers of all skill levels, with over 200 designated climbing routes. The clifftop walkway provides stunning views of Brisbane's skyline and river, while barbecue facilities and parklands make it perfect for picnics. At night, the cliffs are illuminated, creating a spectacular backdrop for the city.",
     image: "https://upload.wikimedia.org/wikipedia/commons/b/b9/Kangaroo_Point_Cliffs.jpg",
     category: "Adventure",
-    activities: ["Rock climbing", "Abseiling", "Walking", "Picnicking"]
+    activities: ["Rock climbing", "Abseiling", "Walking", "Picnicking"],
+    features: ["Climbing routes", "Scenic walkways", "BBQ facilities", "Night lighting"],
+    bestTimeToVisit: "Early morning or late afternoon for climbing"
   },
   {
     id: 13,
     name: "New Farm Park",
     place: "New Farm",
-    location: {
-      latitude: -27.468906581898253,
-      longitude: 153.05134346039918,
-    },
-    description: "Historic park known for its rose garden, weekend markets, and riverside location.",
+    description: "A historic 37-acre riverside park known for its magnificent rose gardens and character-filled jacaranda trees. The park houses over 2,500 roses in its famous circular garden beds. The restored Brisbane Powerhouse, now a contemporary arts venue, sits at its edge. Popular for picnics, cycling, and weekend farmers' markets, it represents the perfect blend of natural beauty and cultural significance. The park comes alive in spring when the jacarandas create a stunning purple canopy.",
     image: "https://assets.atdw-online.com.au/images/880df67cb3ea1e6f8b9b1ce114e3ba59.jpeg?q=eyJ0eXBlIjoibGlzdGluZyIsImxpc3RpbmdJZCI6IjU2YjI1ZjgyMmNiY2JlNzA3M2FkOTQ0MiIsImRpc3RyaWJ1dG9ySWQiOiI1NmIxZWI5MzQ0ZmVjYTNkZjJlMzIwY2IiLCJhcGlrZXlJZCI6IjU2YjFlZmVlMGNmMjEzYWQyMGRkMjE3MCJ9&rect=439%2C0%2C4207%2C3155&rot=360&w=600",
     category: "Parks & Recreation",
-    features: ["Rose garden", "Powerhouse", "Cycling paths", "Picnic areas"]
+    features: ["Rose garden", "Powerhouse", "Cycling paths", "Picnic areas"],
+    bestTimeToVisit: "October-November for jacaranda blooms"
   },
   {
     id: 14,
     name: "Brisbane Powerhouse",
     place: "New Farm",
-    location: {
-      latitude: -27.469093008992665,
-      longitude: 153.0542150554856,
-    },
-    description: "Former power station turned arts venue hosting performances, exhibitions, and events.",
+    description: "A former power station transformed into a dynamic arts and cultural hub. This industrial-chic venue, with its distinctive graffiti-covered walls and exposed infrastructure, hosts contemporary theater, comedy, music, and art exhibitions. The building's industrial heritage is preserved while housing multiple performance spaces, galleries, and riverside restaurants. Its outdoor spaces offer stunning river views and regular free events, making it a vital part of Brisbane's cultural landscape.",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQLUKJmVKMcOfLiW541ar37-KYDSU_rHo6Cqw&s",
     category: "Culture",
-    events: ["Theatre", "Comedy", "Music", "Exhibitions"]
+    events: ["Theatre", "Comedy", "Music", "Exhibitions"],
+    features: ["Multiple venues", "Riverside dining", "Art galleries", "Free events"],
+    historicalValue: "Former power station built in 1927"
   },
   {
     id: 15,
     name: "The Gabba",
     place: "Woolloongabba",
-    location: {
-      latitude: -27.485732856130756,
-      longitude: 153.03809602655758,
-    },
-    description: "Iconic cricket ground and AFL stadium hosting major sporting events.",
+    description: "One of Australia's most iconic sporting venues, known for its distinctive circular shape and electric atmosphere. Home to international cricket matches, AFL games, and major sporting events since 1895. The stadium's recent modernization maintains its historic character while offering world-class facilities. Famous for its intimidating atmosphere during Ashes cricket tests and its unique position as the AFL's northernmost stadium. The venue offers guided tours revealing its rich sporting history.",
     image: "https://cdn.jumpon.online/uploads/attractions/attraction-the-gabba.jpg",
     category: "Sports",
-    capacity: "42,000"
+    capacity: "42,000",
+    features: ["International cricket", "AFL matches", "Stadium tours", "Corporate facilities"],
+    historicalSignificance: "Hosted first test cricket match in 1931"
   },
   {
     id: 16,
     name: "Queensland Museum",
     place: "South Brisbane",
-    location: {
-      latitude: -27.472499735342318,
-      longitude: 153.01847836388166,
-    },
-    description: "State museum featuring natural history, cultural heritage, and science exhibitions.",
+    description: "A world-class museum showcasing Queensland's rich natural and cultural heritage. Features fascinating exhibitions on dinosaurs, native wildlife, and Indigenous culture. The Discovery Centre offers hands-on learning experiences with real museum objects and specimens. SparkLab, an interactive science center, provides engaging experiments and demonstrations. The museum's collection includes over 1.2 million objects telling Queensland's unique story.",
     image: "https://upload.wikimedia.org/wikipedia/commons/e/e9/Facade_of_Queensland_Museum_02.jpg",
     category: "Culture",
-    amenities: ["Cafe", "Gift shop", "Interactive displays"]
+    amenities: ["Cafe", "Gift shop", "Interactive displays"],
+    features: ["SparkLab", "Discovery Centre", "Dinosaur Garden", "Cultural exhibits"],
+    bestTimeToVisit: "Weekday mornings to avoid crowds"
   },
   {
     id: 17,
     name: "Eagle Street Pier",
     place: "Brisbane CBD",
-    location: {
-      latitude: -27.469112421209825,
-      longitude: 153.03066906631068,
-    },
-    description: "Waterfront dining precinct offering fine restaurants and river views.",
+    description: "A sophisticated riverside dining precinct offering Brisbane's finest restaurants and bars. The location provides spectacular views of the Story Bridge and Brisbane River. Home to award-winning restaurants serving diverse cuisines from modern Australian to international flavors. The pier becomes particularly magical at night when the city lights reflect on the river. A popular spot for special occasions and riverside dining.",
     image: "https://australiandevelopmentreview.com.au/wp-content/uploads/2023/02/Hero10.jpeg",
     category: "Dining",
-    features: ["Restaurants", "River views", "City Cat terminal"]
+    features: ["Restaurants", "River views", "City Cat terminal"],
+    bestTimeToVisit: "Sunset and evening hours",
+    amenities: ["Fine dining", "River transport", "Outdoor seating"]
   },
   {
     id: 18,
     name: "Suncorp Stadium",
     place: "Milton",
-    location: {
-      latitude: -27.464987747447687,
-      longitude: 153.00950974573385,
-    },
-    description: "Premier rectangular stadium hosting rugby league, rugby union, and soccer matches.",
+    description: "Queensland's premier rectangular stadium, known for its distinctive 'bubble' roof design and electric atmosphere. Home to major rugby league, rugby union, and soccer matches. The stadium's design ensures excellent views from all 52,500 seats. Its rich history dates back to 1914, with the site originally used as a cemetery. The stadium comes alive during State of Origin matches and international sporting events.",
     image: "https://suncorpstadium.com.au/about/about-us/_jcr_content/root/banner/teaser1.coreimg.jpeg/1726108842464/about-stadium-suncorp-stadium.jpeg",
     category: "Sports",
-    capacity: "52,500"
+    capacity: "52,500",
+    features: ["State of Origin venue", "International events", "Corporate facilities"],
+    historicalValue: "Built on former cemetery grounds"
   },
   {
     id: 19,
     name: "Queens Wharf Brisbane",
     place: "Brisbane CBD",
-    location: {
-      latitude: -27.474227000907856,
-      longitude: 153.02465671955318,
-    },
-    description: "Queens Wharf Brisbane is a $1.5 billion entertainment precinct that includes a 5-star hotel, 1000+ gaming machines, 100+ table games, 100+ bars and restaurants, and a 1000-seat theatre.",
+    description: "A transformative $3.6 billion integrated resort development reshaping Brisbane's CBD. This world-class entertainment precinct combines luxury hotels, high-end retail, diverse dining options, and a stunning Sky Deck offering panoramic city views. The development preserves and celebrates heritage buildings while creating new public spaces along the river. Features include a moonlight cinema, subtropical gardens, and a signature 'Arc' building spanning the street.",
     image: "https://qwtower.com.au/wp-content/uploads/2022/05/QWT_1.HomePage_Menu_QWB.jpg",
     category: "Entertainment",
-    features: ["Gaming", "Restaurants", "Bars", "Hotel", "Theatre"]
+    features: ["Gaming", "Restaurants", "Bars", "Hotel", "Theatre"],
+    amenities: ["Sky Deck", "Heritage trails", "Public art", "Riverside dining"],
+    openingFeatures: "Staged opening from 2024"
   },
   {
     id: 20,
     name: "Customs House",
     place: "Brisbane CBD",
-    location: {
-      latitude: -27.46543639427545,
-      longitude: 153.03108081290657,
-    },
-    description: "Heritage-listed customs house featuring restaurant and function venues.",
+    description: "A magnificent example of Victorian-era architecture, this heritage-listed building stands as one of Brisbane's most prestigious cultural and dining venues. Built in 1889, its distinctive copper dome and sandstone façade are iconic landmarks. Now operated by The University of Queensland, it hosts elegant functions, exhibitions, and houses an award-winning restaurant. The building offers guided heritage tours revealing its fascinating customs history.",
     image: "https://dynamic-media-cdn.tripadvisor.com/media/photo-o/02/61/74/1f/brisbane-s-customs-house.jpg?w=1200&h=-1&s=1",
     category: "Heritage",
-    yearBuilt: 1889
+    yearBuilt: 1889,
+    features: ["Restaurant", "Function rooms", "Heritage tours"],
+    historicalSignificance: "Former customs operations center"
   },
   {
     id: 21,
     name: "James Street Precinct",
     place: "Fortitude Valley",
-    location: {
-      latitude: -27.46232029080101,
-      longitude: 153.03603148509495,
-    },
-    description: "Fashion and lifestyle precinct with boutiques, cafes, and design stores.",
+    description: "Brisbane's premier lifestyle and fashion destination, known for its unique blend of high-end retail, dining, and design. The street features a carefully curated mix of local and international fashion boutiques, acclaimed restaurants, and trendy bars. The precinct's architecture combines heritage buildings with modern designs, creating a sophisticated urban atmosphere. Regular fashion and cultural events make it a hub of Brisbane's creative scene.",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSvdVSY4d4F_ir2SY5tc3E7YHbepkNrV9baWA&s",
     category: "Shopping",
-    features: ["Fashion boutiques", "Cafes", "Design stores"]
+    features: ["Fashion boutiques", "Cafes", "Design stores"],
+    bestTimeToVisit: "Saturday mornings for cafe culture",
+    amenities: ["Boutique shopping", "Fine dining", "Art galleries"]
   },
   {
     id: 22,
     name: "City Botanic Gardens Riverwalk",
     place: "Brisbane CBD",
-    location: {
-      latitude: -27.469689992650288,
-      longitude: 153.03072705591956,
-    },
-    description: "Scenic riverside walkway connecting the City Botanic Gardens to New Farm.",
+    description: "A picturesque waterfront promenade connecting the City Botanic Gardens to New Farm. This floating walkway offers an intimate connection with the Brisbane River, providing stunning views of the city skyline and Story Bridge. Popular among joggers, cyclists, and photographers, the riverwalk comes alive at sunset when the city lights begin to sparkle on the water. The path includes multiple rest stops, viewing platforms, and historical information panels about Brisbane's river history.",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTiw4aByROxaorBqsmWsgKyXOc-CKCAObKCgg&s",
     category: "Recreation",
-    activities: ["Walking", "Cycling", "Running"]
+    activities: ["Walking", "Cycling", "Running"],
+    features: ["River views", "Exercise stations", "Historical markers"],
+    bestTimeToVisit: "Dawn or dusk for photography"
   },
   {
     id: 23,
     name: "Queensland Performing Arts Centre",
     place: "South Brisbane",
-    location: {
-      latitude: -27.474494382809223,
-      longitude: 153.0194417808502,
-    },
-    description: "Premier performing arts venue hosting theatre, opera, and musical performances.",
+    description: "Queensland's premier performing arts venue, hosting world-class theater, opera, ballet, and musical productions. The complex includes multiple venues, from the intimate Cremorne Theatre to the magnificent Lyric Theatre. QPAC hosts over 1,200 performances annually, including international productions and local shows. The building's modernist architecture and riverside location make it a cultural landmark within South Bank's arts precinct.",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS4LCkYfQ85dLRFMu5NX5eJtd8k7sdHjqBtpQ&s",
     category: "Culture",
-    venues: ["Lyric Theatre", "Concert Hall", "Playhouse"]
+    venues: ["Lyric Theatre", "Concert Hall", "Playhouse"],
+    features: ["World-class productions", "Multiple venues", "Riverside dining"],
+    historicalValue: "Opened in 1985 as Queensland's cultural hub"
   },
   {
     id: 24,
     name: "Eat Street Northshore",
     place: "Hamilton",
-    location: {
-      latitude: -27.443953177060944,
-      longitude: 153.07993247893535,
-    },
-    description: "Popular outdoor dining venue featuring international food stalls in shipping containers.",
+    description: "A vibrant dining destination created from colorfully converted shipping containers. This unique food market features over 70 vendors serving international cuisines, desserts, and beverages. Live entertainment, fairy lights, and river views create a magical atmosphere. Each weekend, the market comes alive with music, street performers, and the aroma of global street food. Perfect for families and food enthusiasts seeking a unique dining experience.",
     image: "https://s1.at.atcdn.net/wp-content/uploads/2024/10/eat-street-north-shore-2.png",
     category: "Dining",
-    openingHours: "Friday-Sunday evenings"
+    openingHours: "Friday-Sunday evenings",
+    features: ["International cuisine", "Live entertainment", "River views"],
+    bestTimeToVisit: "Early evening to avoid peak crowds"
   },
   {
     id: 25,
     name: "St John's Cathedral",
     place: "Brisbane CBD",
-    location: {
-      latitude: -27.463935226089525,
-      longitude: 153.02979235079897,
-    },
-    description: "Gothic Revival cathedral and significant architectural landmark.",
+    description: "A masterpiece of Gothic Revival architecture and the only stone-vaulted cathedral in the Southern Hemisphere. Construction spanned over a century, finally completed in 2009. The cathedral features exquisite stained glass windows, intricate stone carvings, and a magnificent pipe organ. Regular guided tours reveal the building's architectural and spiritual significance. The cathedral hosts regular musical performances and cultural events.",
     image: "https://www.gpsmycity.com/img/gd_sight/24183.jpg",
     category: "Heritage",
-    yearCompleted: 2009
+    yearCompleted: 2009,
+    features: ["Gothic architecture", "Stained glass", "Guided tours"],
+    historicalSignificance: "Longest cathedral construction in Australia"
   },
   {
     id: 26,
     name: "Brisbane Quarter",
     place: "Brisbane CBD",
-    location: {
-      latitude: -27.4694,
-      longitude: 153.0227
-    },
-    description: "Modern precinct featuring luxury retail, dining, and the W Brisbane hotel.",
+    description: "A sophisticated mixed-use precinct featuring Brisbane's first W Hotel, premium office space, and luxury retail. The development's three towers create a striking addition to Brisbane's skyline. The podium levels house world-class restaurants and bars with spectacular river views. The complex represents Brisbane's evolution into a world-class city, combining luxury accommodation, dining, and shopping in one prestigious location.",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTVoh2r80_OXqj9_xWNGFLl1PuyaXwq8p_FnQ&s",
     category: "Lifestyle",
-    amenities: ["Restaurants", "Shopping", "Hotel"]
+    amenities: ["Restaurants", "Shopping", "Hotel"],
+    features: ["Luxury retail", "Fine dining", "Sky-high bars"],
+    bestTimeToVisit: "Evening for dining and city views"
   },
   {
     id: 27,
     name: "Victoria Bridge",
     place: "South Brisbane",
-    location: {
-      latitude: -27.472422507631393,
-      longitude: 153.0210096111446,
-    },
-    description: "Historic bridge connecting the CBD to South Brisbane, with pedestrian and cycle paths.",
+    description: "A vital link between Brisbane's CBD and South Bank cultural precinct, this modern bridge carries both vehicular and pedestrian traffic. The current bridge, opened in 1969, is the fourth iteration, replacing earlier versions dating back to 1865. Its wide pedestrian paths offer excellent vantage points for city photography and river views. The bridge comes alive during festivals when it's decorated with lights and artwork.",
     image: "https://render.fineartamerica.com/images/rendered/default/poster/12/6/break/images/artworkimages/medium/1/victoria-bridge-brisbane-michael-lees.jpg",
     category: "Transport",
-    yearBuilt: 1969
+    yearBuilt: 1969,
+    features: ["Pedestrian walkways", "Cycle paths", "Photography spots"],
+    historicalValue: "Fourth bridge on this site since 1865"
   },
   {
     id: 28,
     name: "Fortitude Valley",
     place: "Fortitude Valley",
-    location: {
-      latitude: -27.4579501616323,
-      longitude: 153.03550638784998,
-    },
-    description: "Entertainment precinct known for nightlife, live music venues, and Chinatown.",
+    description: "Brisbane's most eclectic neighborhood, known for its vibrant nightlife, live music scene, and cultural diversity. By day, the Valley hosts boutique shopping and cafe culture; by night, it transforms into the city's premier entertainment district. Home to Chinatown, with authentic Asian dining and regular cultural festivals. The area's street art, historic buildings, and modern developments create a unique urban atmosphere.",
     image: "https://a.travel-assets.com/findyours-php/viewfinder/images/res70/222000/222993-Fortitude-Valley.jpg",
     category: "Entertainment",
-    features: ["Nightclubs", "Live music", "Markets", "Dining"]
+    features: ["Nightclubs", "Live music", "Markets", "Dining"],
+    bestTimeToVisit: "Evening for nightlife, morning for shopping",
+    culturalSignificance: "Brisbane's music and entertainment hub"
   },
   {
     id: 29,
     name: "Captain Burke Park",
     place: "Kangaroo Point",
-    location: {
-      latitude: -27.46516935068712,
-      longitude: 153.03481645712168,
-    },
-    description: "Riverside park under the Story Bridge offering city views and picnic facilities.",
+    description: "A peaceful riverside park offering unparalleled views of the Story Bridge and city skyline. Located beneath the iconic bridge, this park provides perfect vantage points for photography and watching river activities. The park features maritime-themed playground equipment, paying homage to its riverside location. Popular for picnics, fishing, and watching the CityCats glide by. The park is particularly spectacular at night when the Story Bridge lights illuminate the river.",
     image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShcmIoX2nFjmMVFQIFAS7kUA2CziJvApr6Ww&s",
     category: "Parks & Recreation",
-    amenities: ["BBQ facilities", "Playground", "River views"]
-  },
-  {
-    id: 30,
-    name: "Brisbane Lookout Mount Gravatt",
-    place: "Mount Gravatt",
-    location: {
-      latitude: -27.542550218327616,
-      longitude: 153.0727196992047,
-    },
-    description: "Scenic lookout offering views of the city, Moreton Bay, and the Gold Coast.",
-    image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR4Ug07oHF2ve_uhKikEOLoYGPXtq3iOoackQ&s",
-    category: "Nature",
-    elevation: "187m",
-    amenities: ["Cafe", "Viewing platform", "Parking"]
+    amenities: ["BBQ facilities", "Playground", "River views"],
+    features: ["Story Bridge views", "Fishing spots", "Maritime playground"],
+    bestTimeToVisit: "Sunset for bridge photography"
   }
 ];

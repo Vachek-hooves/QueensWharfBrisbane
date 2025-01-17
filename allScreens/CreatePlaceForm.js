@@ -66,7 +66,7 @@ const CreatePlaceForm = ({route, navigation}) => {
 
   const handleSubmit = async () => {
     if (!isFormValid) return;
-    console.log('form is valid');
+    // console.log('form is valid');
 
     const newPlace = {
       id: Date.now().toString(),
@@ -78,7 +78,7 @@ const CreatePlaceForm = ({route, navigation}) => {
       workingHours: `${workingHours.from} - ${workingHours.to}`,
       conveniences: formData.conveniences,
     };
-    console.log(newPlace);
+    // console.log(newPlace);
     navigation.navigate('NavigationMenu', {screen: 'Place'});
     await addPlace(newPlace);
   };

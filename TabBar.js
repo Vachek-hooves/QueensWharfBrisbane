@@ -1,7 +1,7 @@
 import {StyleSheet, View, TouchableOpacity, Image} from 'react-native';
 
 const TabBar = ({navigation, activeRoute}) => {
-  console.log(activeRoute);
+  // console.log(activeRoute);
   return (
     <View style={styles.navbar}>
       <TouchableOpacity

@@ -15,7 +15,6 @@ const Home = () => {
   const {places} = useAppStore();
   const [currentTime, setCurrentTime] = useState(new Date());
   const [weather, setWeather] = useState(null);
-  console.log(places.length);
 
   useEffect(() => {
     const timer = setInterval(() => {
