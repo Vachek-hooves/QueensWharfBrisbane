@@ -15,6 +15,8 @@ const NavigationMenu = () => {
         />
       )}
       screenOptions={{
+        animation: 'fade',
+
         headerShown: false,
         tabBarStyle: {
           backgroundColor: '#001F1F',

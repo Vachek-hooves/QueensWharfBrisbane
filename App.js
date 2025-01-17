@@ -14,9 +14,14 @@ function App() {
   return (
     <ContextProvider>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name="NavigationMenu" component={NavigationMenu} />
+        <Stack.Navigator
+          screenOptions={{
+            headerShown: false,
+            animation: 'fade',
+            animationDuration: 700,
+          }}>
           <Stack.Screen name="WelcomeAppScreen" component={WellcomeAppScreen} />
+          <Stack.Screen name="NavigationMenu" component={NavigationMenu} />
           <Stack.Screen name="PlaceCardDetails" component={PlaceCardDetails} />
           <Stack.Screen name="CreatePlace" component={CreatePlace} />
           <Stack.Screen name="CreatePlaceForm" component={CreatePlaceForm} />
