@@ -30,7 +30,7 @@ const CreatePlace = ({route, navigation}) => {
     },
     {
       id: 'attractions',
-      name: 'AttractionsSightseeing',
+      name: 'Attractions',
       icon: require('../assets/icons/attractions.png'),
     },
   ];
