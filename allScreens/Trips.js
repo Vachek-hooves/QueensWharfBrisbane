@@ -22,8 +22,34 @@ const Trips = ({navigation}) => {
       />
       <View style={styles.tripInfo}>
         <Text style={styles.tripName}>{item.name}</Text>
-        <Text style={styles.tripPlace}>{item.place}</Text>
-        <Text style={styles.tripDate}>{item.date}</Text>
+        <View style={styles.tripDetails}>
+          <View style={styles.locationContainer}>
+            <Image
+              source={require('../assets/icons/location.png')}
+              style={styles.icon}
+            />
+            <Text style={styles.tripPlace}>{item.place}</Text>
+          </View>
+          <View style={styles.timeContainer}>
+            <View style={styles.dateContainer}>
+              <Image
+                source={require('../assets/icons/calendar.png')}
+                style={styles.icon}
+              />
+              <Text style={styles.tripDate}>{item.date}</Text>
+            </View>
+            <View style={styles.timeWrapper}>
+              <Image
+                source={require('../assets/icons/clock.png')}
+                style={styles.icon}
+              />
+              <Text style={styles.tripTime}>{item.time}</Text>
+            </View>
+          </View>
+        </View>
+        <View style={styles.typeBadge}>
+          <Text style={styles.typeBadgeText}>{item.type}</Text>
+        </View>
       </View>
     </TouchableOpacity>
   );
@@ -139,12 +165,12 @@ const styles = StyleSheet.create({
     padding: 15,
     flexDirection: 'row',
     marginBottom: 15,
-    alignItems: 'center',
+    alignItems: 'flex-start',
   },
   tripImage: {
-    width: 60,
-    height: 60,
-    borderRadius: 30,
+    width: 100,
+    height: 100,
+    borderRadius: 50,
     marginRight: 15,
   },
   tripInfo: {
@@ -152,17 +178,58 @@ const styles = StyleSheet.create({
   },
   tripName: {
     color: '#FFFFFF',
-    fontSize: 18,
+    fontSize: 20,
     fontWeight: 'bold',
+    marginBottom: 10,
+  },
+  tripDetails: {
+    marginBottom: 10,
+  },
+  locationContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
     marginBottom: 5,
+  },
+  timeContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  dateContainer: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginRight: 15,
+  },
+  timeWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  icon: {
+    width: 16,
+    height: 16,
+    tintColor: '#00AAB8',
+    marginRight: 5,
   },
   tripPlace: {
     color: '#666666',
     fontSize: 14,
-    marginBottom: 5,
   },
   tripDate: {
-    color: '#00AAB8',
+    color: '#666666',
+    fontSize: 14,
+  },
+  tripTime: {
+    color: '#666666',
+    fontSize: 14,
+  },
+  typeBadge: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#00353C',
+    paddingHorizontal: 15,
+    paddingVertical: 8,
+    borderRadius: 15,
+  },
+  typeBadgeText: {
+    color: '#FFFFFF',
     fontSize: 14,
   },
 });
