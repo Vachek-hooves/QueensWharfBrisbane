@@ -10,7 +10,7 @@ import {
   ScrollView,
 } from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
-import Calendar from 'react-native-calendar';
+import {Calendar} from 'react-native-calendars';
 
 const AddTripForm = ({route, navigation}) => {
   const {tripType} = route.params;
@@ -25,6 +25,7 @@ const AddTripForm = ({route, navigation}) => {
     time: '',
   });
   const [reminder, setReminder] = useState(false);
+  const [selected, setSelected] = useState('');
 
   const handleImagePick = async () => {
     const result = await launchImageLibrary({
@@ -73,6 +74,9 @@ const AddTripForm = ({route, navigation}) => {
     </Modal>
   );
 
+  // Format current date as YYYY-MM-DD string
+  const today = new Date().toISOString().split('T')[0];
+
   return (
     <View style={styles.container}>
       {/* Header */}
@@ -90,7 +94,9 @@ const AddTripForm = ({route, navigation}) => {
 
       <View style={styles.content}>
         {/* Image Picker */}
-        <TouchableOpacity style={styles.imagePickerButton} onPress={handleImagePick}>
+        <TouchableOpacity
+          style={styles.imagePickerButton}
+          onPress={handleImagePick}>
           {image ? (
             <Image source={{uri: image}} style={styles.selectedImage} />
           ) : (
@@ -138,7 +144,11 @@ const AddTripForm = ({route, navigation}) => {
                 source={require('../assets/icons/calendar.png')}
                 style={styles.inputIcon}
               /> */}
-              <Text style={[styles.inputText, !formData.date && styles.placeholder]}>
+              <Text
+                style={[
+                  styles.inputText,
+                  !formData.date && styles.placeholder,
+                ]}>
                 {formData.date || 'Date'}
               </Text>
             </View>
@@ -152,7 +162,11 @@ const AddTripForm = ({route, navigation}) => {
                 source={require('../assets/icons/clock.png')}
                 style={styles.inputIcon}
               /> */}
-              <Text style={[styles.inputText, !formData.time && styles.placeholder]}>
+              <Text
+                style={[
+                  styles.inputText,
+                  !formData.time && styles.placeholder,
+                ]}>
                 {formData.time || 'Time'}
               </Text>
             </View>
@@ -163,7 +177,9 @@ const AddTripForm = ({route, navigation}) => {
             <TouchableOpacity
               style={[styles.switch, reminder && styles.switchActive]}
               onPress={() => setReminder(!reminder)}>
-              <View style={[styles.switchKnob, reminder && styles.switchKnobActive]} />
+              <View
+                style={[styles.switchKnob, reminder && styles.switchKnobActive]}
+              />
             </TouchableOpacity>
           </View>
         </View>
@@ -177,9 +193,32 @@ const AddTripForm = ({route, navigation}) => {
         onRequestClose={() => setShowCalendar(false)}>
         <View style={styles.calendarModal}>
           <Calendar
-            onDateSelect={date => {
-              setFormData({...formData, date: date.format('YYYY-MM-DD')});
+            current={today}
+            onDayPress={day => {
+              setSelected(day.dateString);
+              setFormData({...formData, date: day.dateString});
               setShowCalendar(false);
+            }}
+            markedDates={{
+              [selected]: {
+                selected: true,
+                selectedColor: '#00AAB8',
+              },
+            }}
+            theme={{
+              backgroundColor: '#00181C',
+              calendarBackground: '#00181C',
+              textSectionTitleColor: '#666666',
+              selectedDayBackgroundColor: '#00AAB8',
+              selectedDayTextColor: '#FFFFFF',
+              todayTextColor: '#00AAB8',
+              dayTextColor: '#FFFFFF',
+              textDisabledColor: '#444444',
+              monthTextColor: '#FFFFFF',
+              textMonthFontSize: 18,
+              textDayFontSize: 16,
+              textDayHeaderFontSize: 12,
+              arrowColor: '#00AAB8',
             }}
             style={styles.calendar}
           />
@@ -336,14 +375,14 @@ const styles = StyleSheet.create({
   calendarModal: {
     flex: 1,
     backgroundColor: '#00181C',
-    marginTop: 100,
+    marginTop: '30%',
     borderTopLeftRadius: 20,
     borderTopRightRadius: 20,
     padding: 20,
   },
   calendar: {
-    backgroundColor: '#00353C',
-    borderRadius: 20,
+    borderRadius: 10,
+    marginBottom: 20,
   },
   timePickerOverlay: {
     flex: 1,
@@ -381,7 +420,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#00353C',
     padding: 15,
     borderRadius: 25,
-    marginTop: 20,
+    marginTop: 'auto',
   },
   cancelButtonText: {
     color: '#FFFFFF',
