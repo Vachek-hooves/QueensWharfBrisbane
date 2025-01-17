@@ -6,10 +6,38 @@ import {
   TouchableOpacity,
   Image,
   ScrollView,
+  Alert,
 } from 'react-native';
+import {useAppStore} from '../store/context';
 
 const PlaceDetails = ({route, navigation}) => {
   const {place} = route.params;
+  const {deleteCustomPlace} = useAppStore();
+
+  const handleDelete = () => {
+    Alert.alert(
+      'Delete Place',
+      'Are you sure you want to delete this place?',
+      [
+        {
+          text: 'Cancel',
+          style: 'cancel',
+        },
+        {
+          text: 'Delete',
+          style: 'destructive',
+          onPress: async () => {
+            const success = await deleteCustomPlace(place.id);
+            if (success) {
+              navigation.goBack();
+            } else {
+              Alert.alert('Error', 'Failed to delete place');
+            }
+          },
+        },
+      ],
+    );
+  };
 
   return (
     <View style={styles.container}>
@@ -66,6 +94,13 @@ const PlaceDetails = ({route, navigation}) => {
                 </View>
               ))}
             </View>
+
+            {/* Delete Button */}
+            <TouchableOpacity 
+              style={styles.deleteButton}
+              onPress={handleDelete}>
+              <Text style={styles.deleteButtonText}>Delete</Text>
+            </TouchableOpacity>
           </View>
         </View>
       </ScrollView>
@@ -164,6 +199,20 @@ const styles = StyleSheet.create({
   convenienceText: {
     color: '#FFFFFF',
     fontSize: 16,
+  },
+  deleteButton: {
+    backgroundColor: '#FF0000',
+    padding: 15,
+    borderRadius: 25,
+    alignItems: 'center',
+    marginTop: 20,
+    marginHorizontal: 20,
+    marginBottom: 30,
+  },
+  deleteButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 

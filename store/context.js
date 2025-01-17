@@ -97,6 +97,18 @@ export const ContextProvider = ({children}) => {
     }
   };
 
+  const deleteCustomPlace = async (placeId) => {
+    try {
+      const updatedCustomPlaces = customPlaces.filter(place => place.id !== placeId);
+      await AsyncStorage.setItem('customPlaces', JSON.stringify(updatedCustomPlaces));
+      setCustomPlaces(updatedCustomPlaces);
+      return true;
+    } catch (error) {
+      console.error('Error deleting custom place:', error);
+      return false;
+    }
+  };
+
   const value = {
     places,
     customPlaces,
@@ -105,6 +117,7 @@ export const ContextProvider = ({children}) => {
     trips,
     saveTrip,
     deleteTrip,
+    deleteCustomPlace,
   };
 
   return (
