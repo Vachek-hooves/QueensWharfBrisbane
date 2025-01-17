@@ -9,6 +9,11 @@ export const ContextProvider = ({children}) => {
   const [customPlaces, setCustomPlaces] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [trips, setTrips] = useState([]);
+  const [userData, setUserData] = useState({
+    name: '',
+    email: '',
+    image: null,
+  });
   
 
   // Initialize places data
@@ -21,6 +26,11 @@ export const ContextProvider = ({children}) => {
         const savedTrips = await AsyncStorage.getItem('trips');
         if (savedTrips) {
           setTrips(JSON.parse(savedTrips));
+        }
+        // Load user data
+        const savedUserData = await AsyncStorage.getItem('userData');
+        if (savedUserData) {
+          setUserData(JSON.parse(savedUserData));
         }
       } catch (error) {
         console.error('Error loading data:', error);
@@ -109,6 +119,17 @@ export const ContextProvider = ({children}) => {
     }
   };
 
+  const updateUserProfile = async (newUserData) => {
+    try {
+      await AsyncStorage.setItem('userData', JSON.stringify(newUserData));
+      setUserData(newUserData);
+      return true;
+    } catch (error) {
+      console.error('Error saving user data:', error);
+      return false;
+    }
+  };
+
   const value = {
     places,
     customPlaces,
@@ -118,6 +139,8 @@ export const ContextProvider = ({children}) => {
     saveTrip,
     deleteTrip,
     deleteCustomPlace,
+    userData,
+    updateUserProfile,
   };
 
   return (
