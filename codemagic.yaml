@@ -1,7 +1,7 @@
 workflows:
- queen-travel-workflow:
-  name: Queen Travel to Brisbane
-  max_build_duration: 120
+  queen-travel-workflow:
+    name: Queen Travel to Brisbane
+    max_build_duration: 120
     integrations:
       app_store_connect: QueenTraveltoBrisbaneCodemagic
     environment:
