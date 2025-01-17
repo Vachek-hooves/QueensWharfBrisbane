@@ -7,6 +7,7 @@ import {
   TouchableOpacity,
   TextInput,
   Alert,
+  ScrollView,
 } from 'react-native';
 import {useAppStore} from '../store/context';
 import {launchImageLibrary} from 'react-native-image-picker';
@@ -39,11 +40,18 @@ const Settings = () => {
     }
   };
 
+  const toggleEdit = () => {
+    if (isEditing) {
+      setEditedData(userData); // Reset to original data if canceling
+    }
+    setIsEditing(!isEditing);
+  };
+
   return (
     <View style={styles.container}>
       <Text style={styles.headerTitle}>Profile</Text>
 
-      <View style={styles.content}>
+      <ScrollView style={styles.content}>
         {/* Profile Image */}
         <View style={styles.imageContainer}>
           <Image
@@ -65,45 +73,39 @@ const Settings = () => {
         </View>
 
         {/* Profile Info */}
-        {isEditing ? (
-          <View style={styles.editContainer}>
+        <View style={styles.infoContainer}>
+          {isEditing ? (
             <TextInput
-              style={styles.input}
+              style={styles.nameInput}
               value={editedData.name}
               onChangeText={text => setEditedData({...editedData, name: text})}
-              placeholder="Name"
+              placeholder="Enter your name"
               placeholderTextColor="#666666"
             />
-            <TextInput
-              style={styles.input}
-              value={editedData.email}
-              onChangeText={text => setEditedData({...editedData, email: text})}
-              placeholder="Email"
-              placeholderTextColor="#666666"
-              keyboardType="email-address"
-            />
-            <TouchableOpacity
-              style={styles.saveButton}
-              onPress={() => handleSave(editedData)}>
-              <Text style={styles.saveButtonText}>Save</Text>
-            </TouchableOpacity>
-          </View>
-        ) : (
-          <View style={styles.infoContainer}>
-            <Text style={styles.name}>{userData.name}</Text>
-            <Text style={styles.email}>{userData.email}</Text>
-          </View>
-        )}
+          ) : (
+            <Text style={styles.name}>{userData.name || 'Add your name'}</Text>
+          )}
+          <Text style={styles.email}>{userData.email}</Text>
+        </View>
+
+        {/* Edit/Save Button */}
+        <TouchableOpacity
+          style={styles.editButton}
+          onPress={isEditing ? () => handleSave(editedData) : toggleEdit}>
+          <Text style={styles.editButtonText}>
+            {isEditing ? 'Save' : 'Edit Profile'}
+          </Text>
+        </TouchableOpacity>
 
         {/* Menu Items */}
         <View style={styles.menuContainer}>
-          {/* <TouchableOpacity style={styles.menuItem}>
+          <TouchableOpacity style={styles.menuItem}>
             <Text style={styles.menuText}>Developer Website</Text>
             <Image
               source={require('../assets/icons/arrow-right.png')}
               style={styles.arrowIcon}
             />
-          </TouchableOpacity> */}
+          </TouchableOpacity>
 
           <TouchableOpacity style={styles.menuItem}>
             <Text style={styles.menuText}>Privacy Policy</Text>
@@ -121,7 +123,7 @@ const Settings = () => {
             />
           </TouchableOpacity>
         </View>
-      </View>
+      </ScrollView>
     </View>
   );
 };
@@ -171,7 +173,8 @@ const styles = StyleSheet.create({
   },
   infoContainer: {
     alignItems: 'center',
-    marginBottom: 30,
+    marginBottom: 20,
+    width: '100%',
   },
   name: {
     color: '#FFFFFF',
@@ -227,6 +230,30 @@ const styles = StyleSheet.create({
     width: 42,
     height: 42,
     // tintColor: '#FFFFFF',
+  },
+  nameInput: {
+    backgroundColor: '#00353C',
+    borderRadius: 10,
+    padding: 15,
+    color: '#FFFFFF',
+    fontSize: 24,
+    fontWeight: 'bold',
+    textAlign: 'center',
+    marginBottom: 5,
+    width: '100%',
+  },
+  editButton: {
+    backgroundColor: '#00AAB8',
+    padding: 15,
+    borderRadius: 25,
+    alignItems: 'center',
+    marginTop: 10,
+    marginBottom: 20,
+  },
+  editButtonText: {
+    color: '#FFFFFF',
+    fontSize: 16,
+    fontWeight: 'bold',
   },
 });
 
