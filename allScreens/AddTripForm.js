@@ -373,12 +373,13 @@ const styles = StyleSheet.create({
     transform: [{translateX: 20}],
   },
   calendarModal: {
-    flex: 1,
+    // flex: 1,
     backgroundColor: '#00181C',
     marginTop: '30%',
-    borderTopLeftRadius: 20,
-    borderTopRightRadius: 20,
+    // borderTopLeftRadius: 20,
+    // borderTopRightRadius: 20,
     padding: 20,
+    borderRadius: 20,
   },
   calendar: {
     borderRadius: 10,
