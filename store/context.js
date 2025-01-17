@@ -8,12 +8,25 @@ export const ContextProvider = ({children}) => {
   const [places, setPlaces] = useState([]);
   const [customPlaces, setCustomPlaces] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
+  const [trips, setTrips] = useState([]);
   
 
   // Initialize places data
   useEffect(() => {
     loadPlaces();
     loadCustomPlaces();
+    const loadData = async () => {
+      try {
+        // Load trips
+        const savedTrips = await AsyncStorage.getItem('trips');
+        if (savedTrips) {
+          setTrips(JSON.parse(savedTrips));
+        }
+      } catch (error) {
+        console.error('Error loading data:', error);
+      }
+    };
+    loadData();
   }, []);
 
   // Load default places from AsyncStorage
@@ -58,11 +71,26 @@ export const ContextProvider = ({children}) => {
     }
   };
 
+  // Add this function to save trips
+  const saveTrip = async (newTrip) => {
+    try {
+      const updatedTrips = [...trips, newTrip];
+      await AsyncStorage.setItem('trips', JSON.stringify(updatedTrips));
+      setTrips(updatedTrips);
+      return true;
+    } catch (error) {
+      console.error('Error saving trip:', error);
+      return false;
+    }
+  };
+
   const value = {
     places,
     customPlaces,
     isLoading,
     addPlace,
+    trips,
+    saveTrip,
   };
 
   return (

@@ -8,11 +8,14 @@ import {
   TextInput,
   Modal,
   ScrollView,
+  Alert,
 } from 'react-native';
 import {launchImageLibrary} from 'react-native-image-picker';
 import {Calendar} from 'react-native-calendars';
+import {useAppStore} from '../store/context';
 
 const AddTripForm = ({route, navigation}) => {
+  const {saveTrip} = useAppStore();
   const {tripType} = route.params;
   const [image, setImage] = useState(null);
   const [showCalendar, setShowCalendar] = useState(false);
@@ -76,6 +79,29 @@ const AddTripForm = ({route, navigation}) => {
 
   // Format current date as YYYY-MM-DD string
   const today = new Date().toISOString().split('T')[0];
+
+  const handleSaveTrip = async () => {
+    const newTrip = {
+      id: Date.now().toString(),
+      type: tripType,
+      image: image,
+      name: formData.name,
+      place: formData.place,
+      budget: formData.budget,
+      date: formData.date,
+      time: formData.time,
+      reminder: reminder,
+      createdAt: new Date().toISOString(),
+    };
+
+    const success = await saveTrip(newTrip);
+    if (success) {
+      navigation.navigate('NavigationMenu', {screen: 'Trips'});
+    } else {
+      // You might want to show an error message here
+      Alert.alert('Error', 'Failed to save trip');
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -242,10 +268,7 @@ const AddTripForm = ({route, navigation}) => {
             : styles.doneButtonDisabled,
         ]}
         disabled={!formData.name || !formData.place || !formData.date}
-        onPress={() => {
-          // Handle form submission
-          navigation.navigate('Trips');
-        }}>
+        onPress={handleSaveTrip}>
         <Text style={styles.doneButtonText}>Done</Text>
       </TouchableOpacity>
     </View>

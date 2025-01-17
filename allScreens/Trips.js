@@ -1,29 +1,64 @@
 import React from 'react';
-import {StyleSheet, Text, View, TouchableOpacity, Image} from 'react-native';
+import {
+  StyleSheet,
+  Text,
+  View,
+  TouchableOpacity,
+  Image,
+  FlatList,
+} from 'react-native';
+import {useAppStore} from '../store/context';
 
 const Trips = ({navigation}) => {
+  const {trips} = useAppStore();
+
+  const renderTrip = ({item}) => (
+    <TouchableOpacity
+      style={styles.tripCard}
+      onPress={() => navigation.navigate('TripDetails', {trip: item})}>
+      <Image
+        source={item.image ? {uri: item.image} : require('../assets/icons/plane.png')}
+        style={styles.tripImage}
+      />
+      <View style={styles.tripInfo}>
+        <Text style={styles.tripName}>{item.name}</Text>
+        <Text style={styles.tripPlace}>{item.place}</Text>
+        <Text style={styles.tripDate}>{item.date}</Text>
+      </View>
+    </TouchableOpacity>
+  );
+
   return (
     <View style={styles.container}>
       <Text style={styles.headerTitle}>Trips</Text>
 
-      <View style={styles.contentContainer}>
-        <View style={styles.emptyStateContainer}>
-          <Image
-            source={require('../assets/icons/plane.png')} // Make sure to add this icon
-            style={styles.emptyStateIcon}
-          />
-          <Text style={styles.emptyStateTitle}>Nothing added yet</Text>
-          <Text style={styles.emptyStateSubtitle}>
-            Click on the button below to add the first ride
-          </Text>
+      {trips.length === 0 ? (
+        <View style={styles.contentContainer}>
+          <View style={styles.emptyStateContainer}>
+            <Image
+              source={require('../assets/icons/plane.png')}
+              style={styles.emptyStateIcon}
+            />
+            <Text style={styles.emptyStateTitle}>Nothing added yet</Text>
+            <Text style={styles.emptyStateSubtitle}>
+              Click on the button below to add the first ride
+            </Text>
 
-          <TouchableOpacity
-            style={styles.addButton}
-            onPress={() => navigation.navigate('AddTrip')}>
-            <Text style={styles.addButtonText}>Add Trip</Text>
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.addButton}
+              onPress={() => navigation.navigate('AddTrip')}>
+              <Text style={styles.addButtonText}>Add Trip</Text>
+            </TouchableOpacity>
+          </View>
         </View>
-      </View>
+      ) : (
+        <FlatList
+          data={trips}
+          renderItem={renderTrip}
+          keyExtractor={item => item.id}
+          contentContainerStyle={styles.tripsList}
+        />
+      )}
     </View>
   );
 };
@@ -86,6 +121,41 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontWeight: 'bold',
     textAlign: 'center',
+  },
+  tripsList: {
+    padding: 20,
+  },
+  tripCard: {
+    backgroundColor: '#00181C',
+    borderRadius: 20,
+    padding: 15,
+    flexDirection: 'row',
+    marginBottom: 15,
+    alignItems: 'center',
+  },
+  tripImage: {
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    marginRight: 15,
+  },
+  tripInfo: {
+    flex: 1,
+  },
+  tripName: {
+    color: '#FFFFFF',
+    fontSize: 18,
+    fontWeight: 'bold',
+    marginBottom: 5,
+  },
+  tripPlace: {
+    color: '#666666',
+    fontSize: 14,
+    marginBottom: 5,
+  },
+  tripDate: {
+    color: '#00AAB8',
+    fontSize: 14,
   },
 });
 
