@@ -28,12 +28,12 @@ const PlaceDetails = ({route, navigation}) => {
         </Text>
       </View>
 
-      <ScrollView style={styles.content}>
-        {/* Image */}
+      <ScrollView style={styles.scrollView}>
         <View style={styles.imageContainer}>
           <Image source={{uri: place.image}} style={styles.placeImage} />
         </View>
-
+        {/* Image */}
+<View style={styles.content}>
         {/* Category Badge */}
         <View style={styles.categoryContainer}>
           <Text style={styles.categoryText}>{place.category}</Text>
@@ -66,13 +66,16 @@ const PlaceDetails = ({route, navigation}) => {
               </View>
             ))}
           </View>
-        </View>
+        </View></View>
       </ScrollView>
     </View>
   );
 };
 
 const styles = StyleSheet.create({
+  scrollView: {
+    flex: 1,
+  },
   container: {
     flex: 1,
     backgroundColor: '#000000',
@@ -102,16 +105,16 @@ const styles = StyleSheet.create({
     marginLeft: 10,
   },
   content: {
-    flex: 1,
-    backgroundColor: '#00181C',
-    marginHorizontal: 20,
-    marginTop: 20,
+    backgroundColor: '#001F1F',
     borderRadius: 20,
+    padding: 20,
+    paddingTop: 120, // Extra padding to account for image overlap
    
   },
   imageContainer: {
     alignItems: 'center',
-    marginBottom: 20,
+    zIndex: 2,
+    marginBottom: -100,
 
   },
   placeImage: {
@@ -133,7 +136,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   detailsContainer: {
-    paddingHorizontal: 20,
+    paddingHorizontal: 10,
     
   },
   label: {
