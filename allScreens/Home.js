@@ -10,7 +10,7 @@ import React, {useState, useEffect} from 'react';
 import {useAppStore} from '../store/context';
 import MainLayout from '../components/latout/MainLayout';
 import PlaceCard from '../components/homeComponents/PlaceCard';
-
+import Weather from '../components/UI/Weather';
 const Home = () => {
   const {places} = useAppStore();
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -44,8 +44,9 @@ const Home = () => {
               {currentTime.getMinutes().toString().padStart(2, '0')}
             </Text>
           </View>
+          {/* <Weather /> */}
           <View style={styles.weatherBox}>
-            <Text style={styles.temperature}>26°</Text>
+            <Text style={styles.temperature}>27°</Text>
             <View>
               <Text style={styles.city}>Brisbane</Text>
               <Text style={styles.country}>Australia</Text>
