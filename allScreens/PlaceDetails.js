@@ -9,102 +9,101 @@ import {
   Alert,
 } from 'react-native';
 import {useAppStore} from '../store/context';
+import LayouImage from '../components/latout/LayouImage';
 
 const PlaceDetails = ({route, navigation}) => {
   const {place} = route.params;
   const {deleteCustomPlace} = useAppStore();
 
   const handleDelete = () => {
-    Alert.alert(
-      'Delete Place',
-      'Are you sure you want to delete this place?',
-      [
-        {
-          text: 'Cancel',
-          style: 'cancel',
+    Alert.alert('Delete Place', 'Are you sure you want to delete this place?', [
+      {
+        text: 'Cancel',
+        style: 'cancel',
+      },
+      {
+        text: 'Delete',
+        style: 'destructive',
+        onPress: async () => {
+          const success = await deleteCustomPlace(place.id);
+          if (success) {
+            navigation.goBack();
+          } else {
+            Alert.alert('Error', 'Failed to delete place');
+          }
         },
-        {
-          text: 'Delete',
-          style: 'destructive',
-          onPress: async () => {
-            const success = await deleteCustomPlace(place.id);
-            if (success) {
-              navigation.goBack();
-            } else {
-              Alert.alert('Error', 'Failed to delete place');
-            }
-          },
-        },
-      ],
-    );
+      },
+    ]);
   };
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.backButton}>
-          <Image
-            source={require('../assets/icons/back.png')}
-            style={styles.backIcon}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle} numberOfLines={1}>
-          {place.name}
-        </Text>
-      </View>
-
-      <ScrollView style={styles.scrollView}>
-        <View style={styles.imageContainer}>
-          <Image source={{uri: place.image}} style={styles.placeImage} />
+    <LayouImage>
+      <View style={styles.container}>
+        {/* Header */}
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.backButton}>
+            <Image
+              source={require('../assets/icons/back.png')}
+              style={styles.backIcon}
+            />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle} numberOfLines={1}>
+            {place.name}
+          </Text>
         </View>
-        {/* Image */}
-        <View style={styles.content}>
-          {/* Category Badge */}
-          <View style={styles.categoryContainer}>
-            <Text style={styles.categoryText}>{place.category}</Text>
+
+        <ScrollView style={styles.scrollView}>
+          <View style={styles.imageContainer}>
+            <Image source={{uri: place.image}} style={styles.placeImage} />
           </View>
-
-          {/* Details */}
-          <View style={styles.detailsContainer}>
-            {/* Place Name */}
-            <Text style={styles.label}>Place Name</Text>
-            <Text style={styles.value}>{place.name}</Text>
-
-            {/* Location */}
-            <Text style={styles.label}>Location</Text>
-            <Text style={styles.value}>{place.location}</Text>
-
-            {/* Description */}
-            <Text style={styles.label}>Description</Text>
-            <Text style={styles.value}>{place.description}</Text>
-
-            {/* Working Hours */}
-            <Text style={styles.label}>Working hours</Text>
-            <Text style={styles.value}>{place.workingHours}</Text>
-
-            {/* Conveniences */}
-            <Text style={styles.label}>Conveniences</Text>
-            <View style={styles.conveniencesContainer}>
-              {place.conveniences.map((item, index) => (
-                <View key={index} style={styles.convenienceItem}>
-                  <Text style={styles.convenienceText}>{item}</Text>
-                </View>
-              ))}
+          {/* Image */}
+          <View style={styles.content}>
+            {/* Category Badge */}
+            <View style={styles.categoryContainer}>
+              <Text style={styles.categoryText}>{place.category}</Text>
             </View>
 
-            {/* Delete Button */}
-            <TouchableOpacity 
-              style={styles.deleteButton}
-              onPress={handleDelete}>
-              <Text style={styles.deleteButtonText}>Delete</Text>
-            </TouchableOpacity>
+            {/* Details */}
+            <View style={styles.detailsContainer}>
+              {/* Place Name */}
+              <Text style={styles.label}>Place Name</Text>
+              <Text style={styles.value}>{place.name}</Text>
+
+              {/* Location */}
+              <Text style={styles.label}>Location</Text>
+              <Text style={styles.value}>{place.location}</Text>
+
+              {/* Description */}
+              <Text style={styles.label}>Description</Text>
+              <Text style={styles.value}>{place.description}</Text>
+
+              {/* Working Hours */}
+              <Text style={styles.label}>Working hours</Text>
+              <Text style={styles.value}>{place.workingHours}</Text>
+
+              {/* Conveniences */}
+              <Text style={styles.label}>Conveniences</Text>
+              <View style={styles.conveniencesContainer}>
+                {place.conveniences.map((item, index) => (
+                  <View key={index} style={styles.convenienceItem}>
+                    <Text style={styles.convenienceText}>{item}</Text>
+                  </View>
+                ))}
+              </View>
+
+              {/* Delete Button */}
+              <TouchableOpacity
+                style={styles.deleteButton}
+                onPress={handleDelete}>
+                <Text style={styles.deleteButtonText}>Delete</Text>
+              </TouchableOpacity>
+            </View>
           </View>
-        </View>
-      </ScrollView>
-    </View>
+        </ScrollView>
+      </View>
+    </LayouImage>
   );
 };
 
@@ -114,7 +113,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    // backgroundColor: '#000000',
   },
   header: {
     flexDirection: 'row',

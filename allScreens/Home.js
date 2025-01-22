@@ -11,6 +11,7 @@ import {useAppStore} from '../store/context';
 import MainLayout from '../components/latout/MainLayout';
 import PlaceCard from '../components/homeComponents/PlaceCard';
 import Weather from '../components/UI/Weather';
+import LayouImage from '../components/latout/LayouImage';
 const Home = () => {
   const {places} = useAppStore();
   const [currentTime, setCurrentTime] = useState(new Date());
@@ -25,61 +26,63 @@ const Home = () => {
   }, []);
 
   return (
-    <MainLayout>
-      <ScrollView style={styles.container}>
-        <Text style={styles.title}>Home</Text>
+    // <MainLayout>
+      <LayouImage>
+        <ScrollView style={styles.container}>
+          <Text style={styles.title}>Home</Text>
 
-        {/* Time and Weather Section */}
-        <View style={styles.timeWeatherContainer}>
-          <View style={styles.timeBox}>
-            <Text style={styles.timeText}>
-              {currentTime.getHours().toString().padStart(2, '0')}
-            </Text>
-            {/* <Text style={styles.ampm}>
+          {/* Time and Weather Section */}
+          <View style={styles.timeWeatherContainer}>
+            <View style={styles.timeBox}>
+              <Text style={styles.timeText}>
+                {currentTime.getHours().toString().padStart(2, '0')}
+              </Text>
+              {/* <Text style={styles.ampm}>
               {currentTime.getHours() >= 12 ? 'PM' : 'AM'}
             </Text> */}
-          </View>
-          <View style={styles.timeBox}>
-            <Text style={styles.timeText}>
-              {currentTime.getMinutes().toString().padStart(2, '0')}
-            </Text>
-          </View>
-          {/* <Weather /> */}
-          <View style={styles.weatherBox}>
-            <Text style={styles.temperature}>27°</Text>
-            <View>
-              <Text style={styles.city}>Brisbane</Text>
-              <Text style={styles.country}>Australia</Text>
+            </View>
+            <View style={styles.timeBox}>
+              <Text style={styles.timeText}>
+                {currentTime.getMinutes().toString().padStart(2, '0')}
+              </Text>
+            </View>
+            {/* <Weather /> */}
+            <View style={styles.weatherBox}>
+              <Text style={styles.temperature}>27°</Text>
+              <View>
+                <Text style={styles.city}>Brisbane</Text>
+                <Text style={styles.country}>Australia</Text>
+              </View>
             </View>
           </View>
-        </View>
 
-        {/* People Section */}
-        {/* <TouchableOpacity style={styles.sectionHeader}>
+          {/* People Section */}
+          {/* <TouchableOpacity style={styles.sectionHeader}>
           <Text style={styles.sectionTitle}>People</Text>
           <Text style={styles.sectionArrow}>›</Text>
         </TouchableOpacity> */}
 
-        {/* News Section */}
-        <View style={styles.newsSection}>
-          {/* <View style={styles.sectionHeader}>
+          {/* News Section */}
+          <View style={styles.newsSection}>
+            {/* <View style={styles.sectionHeader}>
             <Text style={styles.sectionTitle}>News</Text>
             <Text style={styles.sectionLink}>All ›</Text>
           </View> */}
-        </View>
+          </View>
 
-        {places.map(place => (
-          <PlaceCard
-            key={place.id}
-            title={place.name}
-            description={place.description}
-            image={place.image}
-            id={place.id}
-          />
-        ))}
-      </ScrollView>
-      <View style={{height: 130}} />
-    </MainLayout>
+          {places.map(place => (
+            <PlaceCard
+              key={place.id}
+              title={place.name}
+              description={place.description}
+              image={place.image}
+              id={place.id}
+            />
+          ))}
+        </ScrollView>
+        <View style={{height: 130}} />
+      </LayouImage>
+    // </MainLayout> 
   );
 };
 

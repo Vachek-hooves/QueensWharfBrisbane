@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
+import LayouImage from '../components/latout/LayouImage';
 
 const AddTrip = ({navigation}) => {
   const [selectedType, setSelectedType] = useState(null);
@@ -14,76 +15,78 @@ const AddTrip = ({navigation}) => {
   const tripTypes = ['Vacation', 'Business', 'Weekend', 'Adventure'];
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.backButton}>
-          <Image
-            source={require('../assets/icons/back.png')}
-            style={styles.backIcon}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Add Trip</Text>
-      </View>
-
-      <ScrollView
-        contentContainerStyle={{borderRadius: 20}}
-        showsVerticalScrollIndicator={false}>
-        <View style={styles.content}>
-          {/* Plane Icon */}
-          <Image
-            source={require('../assets/icons/plane.png')}
-            style={styles.planeIcon}
-          />
-
-          {/* Trip Type Selection */}
-          <Text style={styles.sectionTitle}>Type of trip</Text>
-          <View style={styles.typeContainer}>
-            {tripTypes.map(type => (
-              <TouchableOpacity
-                key={type}
-                style={[
-                  styles.typeButton,
-                  selectedType === type && styles.selectedTypeButton,
-                ]}
-                onPress={() => setSelectedType(type)}>
-                <Text
-                  style={[
-                    styles.typeText,
-                    selectedType === type && styles.selectedTypeText,
-                  ]}>
-                  {type}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </View>
+    <LayouImage>
+      <View style={styles.container}>
+        {/* Header */}
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.backButton}>
+            <Image
+              source={require('../assets/icons/back.png')}
+              style={styles.backIcon}
+            />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Add Trip</Text>
         </View>
-      </ScrollView>
-      <View style={{height: 29}} />
-      {/* Next Button */}
-      <TouchableOpacity
-        style={[
-          styles.nextButton,
-          selectedType ? styles.nextButtonActive : styles.nextButtonDisabled,
-        ]}
-        disabled={!selectedType}
-        onPress={() => {
-          if (selectedType) {
-            navigation.navigate('AddTripForm', {tripType: selectedType});
-          }
-        }}>
-        <Text style={styles.nextButtonText}>Next</Text>
-      </TouchableOpacity>
-    </View>
+
+        <ScrollView
+          contentContainerStyle={{borderRadius: 20}}
+          showsVerticalScrollIndicator={false}>
+          <View style={styles.content}>
+            {/* Plane Icon */}
+            <Image
+              source={require('../assets/icons/plane.png')}
+              style={styles.planeIcon}
+            />
+
+            {/* Trip Type Selection */}
+            <Text style={styles.sectionTitle}>Type of trip</Text>
+            <View style={styles.typeContainer}>
+              {tripTypes.map(type => (
+                <TouchableOpacity
+                  key={type}
+                  style={[
+                    styles.typeButton,
+                    selectedType === type && styles.selectedTypeButton,
+                  ]}
+                  onPress={() => setSelectedType(type)}>
+                  <Text
+                    style={[
+                      styles.typeText,
+                      selectedType === type && styles.selectedTypeText,
+                    ]}>
+                    {type}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </View>
+          </View>
+        </ScrollView>
+        <View style={{height: 29}} />
+        {/* Next Button */}
+        <TouchableOpacity
+          style={[
+            styles.nextButton,
+            selectedType ? styles.nextButtonActive : styles.nextButtonDisabled,
+          ]}
+          disabled={!selectedType}
+          onPress={() => {
+            if (selectedType) {
+              navigation.navigate('AddTripForm', {tripType: selectedType});
+            }
+          }}>
+          <Text style={styles.nextButtonText}>Next</Text>
+        </TouchableOpacity>
+      </View>
+    </LayouImage>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    // backgroundColor: '#000000',
   },
   header: {
     flexDirection: 'row',
@@ -93,13 +96,14 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   backButton: {
-    width: 40,
-    height: 40,
     justifyContent: 'center',
+    backgroundColor: '#fff',
+    padding: 3,
+    borderRadius: 12,
   },
   backIcon: {
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     tintColor: '#00AAB8',
   },
   headerTitle: {

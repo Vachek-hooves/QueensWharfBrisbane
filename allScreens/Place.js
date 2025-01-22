@@ -8,6 +8,7 @@ import {
   Image,
 } from 'react-native';
 import {useAppStore} from '../store/context';
+import LayouImage from '../components/latout/LayouImage';
 
 const Place = ({navigation}) => {
   const {customPlaces} = useAppStore();
@@ -35,81 +36,82 @@ const Place = ({navigation}) => {
   );
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.backButton}>
-          <Text style={styles.backIcon}>{'<'}</Text>
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Place</Text>
-      </View>
-
-      {/* Types ScrollView */}
-      <ScrollView
-        horizontal
-        showsHorizontalScrollIndicator={false}
-        style={styles.typesContainer}>
-        {types.map(type => (
+    <LayouImage>
+      <View style={styles.container}>
+        {/* Header */}
+        <View style={styles.header}>
           <TouchableOpacity
-            key={type}
-            style={[
-              styles.typeButton,
-              selectedType === type && styles.selectedTypeButton,
-            ]}
-            onPress={() => setSelectedType(type)}>
-            <Image
-              source={categoryIcons[type]}
+            onPress={() => navigation.goBack()}
+            style={styles.backButton}>
+            <Text style={styles.backIcon}>{'<'}</Text>
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Place</Text>
+        </View>
+
+        {/* Types ScrollView */}
+        <ScrollView
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          style={styles.typesContainer}>
+          {types.map(type => (
+            <TouchableOpacity
+              key={type}
               style={[
-                styles.typeIcon,
-                selectedType === type && styles.selectedTypeIcon,
+                styles.typeButton,
+                selectedType === type && styles.selectedTypeButton,
               ]}
-            />
-            <Text
-              style={[
-                styles.typeText,
-                selectedType === type && styles.selectedTypeText,
-              ]}>
-              {type}
-            </Text>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
-
-      {/* Places List */}
-      <ScrollView style={styles.placesContainer}>
-        {filteredPlaces.map(place => (
-          <TouchableOpacity
-            key={place.id}
-            style={styles.placeCard}
-            onPress={() => navigation.navigate('PlaceDetails', {place})}>
-            <Image source={{uri: place.image}} style={styles.placeImage} />
-            <View style={styles.placeInfo}>
-              <Text style={styles.placeName}>{place.name}</Text>
-              <Text style={styles.placeDescription} numberOfLines={2}>
-                {place.description}
+              onPress={() => setSelectedType(type)}>
+              <Image
+                source={categoryIcons[type]}
+                style={[
+                  styles.typeIcon,
+                  selectedType === type && styles.selectedTypeIcon,
+                ]}
+              />
+              <Text
+                style={[
+                  styles.typeText,
+                  selectedType === type && styles.selectedTypeText,
+                ]}>
+                {type}
               </Text>
-            </View>
-          </TouchableOpacity>
-        ))}
-      </ScrollView>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
 
-      {/* Add Place Button */}
-      <TouchableOpacity
-        style={styles.addButton}
-        onPress={() => navigation.navigate('CreatePlace')}
-        >
-        <Text style={styles.addButtonText}>Add Place</Text>
-      </TouchableOpacity>
-    </View>
+        {/* Places List */}
+        <ScrollView style={styles.placesContainer}>
+          {filteredPlaces.map(place => (
+            <TouchableOpacity
+              key={place.id}
+              style={styles.placeCard}
+              onPress={() => navigation.navigate('PlaceDetails', {place})}>
+              <Image source={{uri: place.image}} style={styles.placeImage} />
+              <View style={styles.placeInfo}>
+                <Text style={styles.placeName}>{place.name}</Text>
+                <Text style={styles.placeDescription} numberOfLines={2}>
+                  {place.description}
+                </Text>
+              </View>
+            </TouchableOpacity>
+          ))}
+        </ScrollView>
+
+        {/* Add Place Button */}
+        <TouchableOpacity
+          style={styles.addButton}
+          onPress={() => navigation.navigate('CreatePlace')}>
+          <Text style={styles.addButtonText}>Add Place</Text>
+        </TouchableOpacity>
+      </View>
+    </LayouImage>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    // backgroundColor: '#000000',
   },
   headerTitle: {
     color: '#FFFFFF',

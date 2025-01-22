@@ -13,6 +13,7 @@ import {
 import {launchImageLibrary} from 'react-native-image-picker';
 import {Calendar} from 'react-native-calendars';
 import {useAppStore} from '../store/context';
+import LayouImage from '../components/latout/LayouImage';
 
 const AddTripForm = ({route, navigation}) => {
   const {saveTrip} = useAppStore();
@@ -104,101 +105,102 @@ const AddTripForm = ({route, navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.backButton}>
-          <Image
-            source={require('../assets/icons/back.png')}
-            style={styles.backIcon}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Add Trip</Text>
-      </View>
+    <LayouImage>
+      <View style={styles.container}>
+        {/* Header */}
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.backButton}>
+            <Image
+              source={require('../assets/icons/back.png')}
+              style={styles.backIcon}
+            />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Add Trip</Text>
+        </View>
 
-      <View style={styles.content}>
-        {/* Image Picker */}
-        <TouchableOpacity
-          style={styles.imagePickerButton}
-          onPress={handleImagePick}>
-          {image ? (
-            <Image source={{uri: image}} style={styles.selectedImage} />
-          ) : (
-            <View style={styles.imagePlaceholder}>
-              <Image
-                source={require('../assets/icons/camera.png')}
-                style={styles.cameraIcon}
+        <View style={styles.content}>
+          {/* Image Picker */}
+          <TouchableOpacity
+            style={styles.imagePickerButton}
+            onPress={handleImagePick}>
+            {image ? (
+              <Image source={{uri: image}} style={styles.selectedImage} />
+            ) : (
+              <View style={styles.imagePlaceholder}>
+                <Image
+                  source={require('../assets/icons/camera.png')}
+                  style={styles.cameraIcon}
+                />
+              </View>
+            )}
+          </TouchableOpacity>
+          <ScrollView>
+            {/* Form Fields */}
+            <View style={styles.form}>
+              <TextInput
+                style={styles.input}
+                placeholder="Name of the trip"
+                placeholderTextColor="#666666"
+                value={formData.name}
+                onChangeText={text => setFormData({...formData, name: text})}
               />
-            </View>
-          )}
-        </TouchableOpacity>
-        <ScrollView>
-          {/* Form Fields */}
-          <View style={styles.form}>
-            <TextInput
-              style={styles.input}
-              placeholder="Name of the trip"
-              placeholderTextColor="#666666"
-              value={formData.name}
-              onChangeText={text => setFormData({...formData, name: text})}
-            />
 
-            <TextInput
-              style={styles.input}
-              placeholder="Place"
-              placeholderTextColor="#666666"
-              value={formData.place}
-              onChangeText={text => setFormData({...formData, place: text})}
-            />
+              <TextInput
+                style={styles.input}
+                placeholder="Place"
+                placeholderTextColor="#666666"
+                value={formData.place}
+                onChangeText={text => setFormData({...formData, place: text})}
+              />
 
-            <TextInput
-              style={styles.input}
-              placeholder="Budget"
-              placeholderTextColor="#666666"
-              keyboardType="numeric"
-              value={formData.budget}
-              onChangeText={text => setFormData({...formData, budget: text})}
-            />
+              <TextInput
+                style={styles.input}
+                placeholder="Budget"
+                placeholderTextColor="#666666"
+                keyboardType="numeric"
+                value={formData.budget}
+                onChangeText={text => setFormData({...formData, budget: text})}
+              />
 
-            <TouchableOpacity
-              style={styles.input}
-              onPress={() => setShowCalendar(true)}>
-              <View style={styles.inputWithIcon}>
-                {/* <Image
+              <TouchableOpacity
+                style={styles.input}
+                onPress={() => setShowCalendar(true)}>
+                <View style={styles.inputWithIcon}>
+                  {/* <Image
                 source={require('../assets/icons/calendar.png')}
                 style={styles.inputIcon}
               /> */}
-                <Text
-                  style={[
-                    styles.inputText,
-                    !formData.date && styles.placeholder,
-                  ]}>
-                  {formData.date || 'Date'}
-                </Text>
-              </View>
-            </TouchableOpacity>
+                  <Text
+                    style={[
+                      styles.inputText,
+                      !formData.date && styles.placeholder,
+                    ]}>
+                    {formData.date || 'Date'}
+                  </Text>
+                </View>
+              </TouchableOpacity>
 
-            <TouchableOpacity
-              style={styles.input}
-              onPress={() => setShowTimePicker(true)}>
-              <View style={styles.inputWithIcon}>
-                {/* <Image
+              <TouchableOpacity
+                style={styles.input}
+                onPress={() => setShowTimePicker(true)}>
+                <View style={styles.inputWithIcon}>
+                  {/* <Image
                 source={require('../assets/icons/clock.png')}
                 style={styles.inputIcon}
               /> */}
-                <Text
-                  style={[
-                    styles.inputText,
-                    !formData.time && styles.placeholder,
-                  ]}>
-                  {formData.time || 'Time'}
-                </Text>
-              </View>
-            </TouchableOpacity>
+                  <Text
+                    style={[
+                      styles.inputText,
+                      !formData.time && styles.placeholder,
+                    ]}>
+                    {formData.time || 'Time'}
+                  </Text>
+                </View>
+              </TouchableOpacity>
 
-            {/* <View style={styles.reminderContainer}>
+              {/* <View style={styles.reminderContainer}>
               <Text style={styles.reminderText}>Reminder</Text>
               <TouchableOpacity
                 style={[styles.switch, reminder && styles.switchActive]}
@@ -211,78 +213,79 @@ const AddTripForm = ({route, navigation}) => {
                 />
               </TouchableOpacity>
             </View> */}
-          </View>
-        </ScrollView>
-      </View>
-
-      {/* Calendar Modal */}
-      <Modal
-        visible={showCalendar}
-        transparent={true}
-        animationType="slide"
-        onRequestClose={() => setShowCalendar(false)}>
-        <View style={styles.calendarModal}>
-          <Calendar
-            current={today}
-            onDayPress={day => {
-              setSelected(day.dateString);
-              setFormData({...formData, date: day.dateString});
-              setShowCalendar(false);
-            }}
-            markedDates={{
-              [selected]: {
-                selected: true,
-                selectedColor: '#00AAB8',
-              },
-            }}
-            theme={{
-              backgroundColor: '#00181C',
-              calendarBackground: '#00181C',
-              textSectionTitleColor: '#666666',
-              selectedDayBackgroundColor: '#00AAB8',
-              selectedDayTextColor: '#FFFFFF',
-              todayTextColor: '#00AAB8',
-              dayTextColor: '#FFFFFF',
-              textDisabledColor: '#444444',
-              monthTextColor: '#FFFFFF',
-              textMonthFontSize: 18,
-              textDayFontSize: 16,
-              textDayHeaderFontSize: 12,
-              arrowColor: '#00AAB8',
-            }}
-            style={styles.calendar}
-          />
-          <TouchableOpacity
-            style={styles.cancelButton}
-            onPress={() => setShowCalendar(false)}>
-            <Text style={styles.cancelButtonText}>Cancel</Text>
-          </TouchableOpacity>
+            </View>
+          </ScrollView>
         </View>
-      </Modal>
 
-      {/* Time Picker Modal */}
-      <TimePickerModal />
+        {/* Calendar Modal */}
+        <Modal
+          visible={showCalendar}
+          transparent={true}
+          animationType="slide"
+          onRequestClose={() => setShowCalendar(false)}>
+          <View style={styles.calendarModal}>
+            <Calendar
+              current={today}
+              onDayPress={day => {
+                setSelected(day.dateString);
+                setFormData({...formData, date: day.dateString});
+                setShowCalendar(false);
+              }}
+              markedDates={{
+                [selected]: {
+                  selected: true,
+                  selectedColor: '#00AAB8',
+                },
+              }}
+              theme={{
+                backgroundColor: '#00181C',
+                calendarBackground: '#00181C',
+                textSectionTitleColor: '#666666',
+                selectedDayBackgroundColor: '#00AAB8',
+                selectedDayTextColor: '#FFFFFF',
+                todayTextColor: '#00AAB8',
+                dayTextColor: '#FFFFFF',
+                textDisabledColor: '#444444',
+                monthTextColor: '#FFFFFF',
+                textMonthFontSize: 18,
+                textDayFontSize: 16,
+                textDayHeaderFontSize: 12,
+                arrowColor: '#00AAB8',
+              }}
+              style={styles.calendar}
+            />
+            <TouchableOpacity
+              style={styles.cancelButton}
+              onPress={() => setShowCalendar(false)}>
+              <Text style={styles.cancelButtonText}>Cancel</Text>
+            </TouchableOpacity>
+          </View>
+        </Modal>
 
-      {/* Done Button */}
-      <TouchableOpacity
-        style={[
-          styles.doneButton,
-          formData.name && formData.place && formData.date
-            ? styles.doneButtonActive
-            : styles.doneButtonDisabled,
-        ]}
-        disabled={!formData.name || !formData.place || !formData.date}
-        onPress={handleSaveTrip}>
-        <Text style={styles.doneButtonText}>Done</Text>
-      </TouchableOpacity>
-    </View>
+        {/* Time Picker Modal */}
+        <TimePickerModal />
+
+        {/* Done Button */}
+        <TouchableOpacity
+          style={[
+            styles.doneButton,
+            formData.name && formData.place && formData.date
+              ? styles.doneButtonActive
+              : styles.doneButtonDisabled,
+          ]}
+          disabled={!formData.name || !formData.place || !formData.date}
+          onPress={handleSaveTrip}>
+          <Text style={styles.doneButtonText}>Done</Text>
+        </TouchableOpacity>
+      </View>
+    </LayouImage>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    // backgroundColor: '#000000',
   },
   header: {
     flexDirection: 'row',
@@ -292,13 +295,16 @@ const styles = StyleSheet.create({
     marginBottom: 20,
   },
   backButton: {
-    width: 40,
-    height: 40,
+    // width: 40,
+    // height: 40,
     justifyContent: 'center',
+    backgroundColor: '#fff',
+    padding: 3,
+    borderRadius: 12,
   },
   backIcon: {
-    width: 30,
-    height: 30,
+    width: 40,
+    height: 40,
     tintColor: '#00AAB8',
   },
   headerTitle: {

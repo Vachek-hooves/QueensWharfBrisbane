@@ -1,5 +1,6 @@
 import React, {useEffect} from 'react';
 import {StyleSheet, Text, View, Animated} from 'react-native';
+import LayouImage from '../components/latout/LayouImage';
 
 const WelcomeAppScreen = ({navigation}) => {
   // Create animated values for each word
@@ -34,26 +35,28 @@ const WelcomeAppScreen = ({navigation}) => {
   }, []);
 
   return (
-    <View style={styles.container}>
-      <View style={styles.textContainer}>
-        <Animated.Text style={[styles.text, {opacity: fadeAnim1}]}>
-          Queen Travel
-        </Animated.Text>
-        <Animated.Text style={[styles.text, {opacity: fadeAnim2}]}>
-          to
-        </Animated.Text>
-        <Animated.Text style={[styles.text, {opacity: fadeAnim3}]}>
-          Brisbane
-        </Animated.Text>
+    <LayouImage>
+      <View style={styles.container}>
+        <View style={styles.textContainer}>
+          <Animated.Text style={[styles.text, {opacity: fadeAnim1}]}>
+            Queen Travel
+          </Animated.Text>
+          <Animated.Text style={[styles.text, {opacity: fadeAnim2}]}>
+            to
+          </Animated.Text>
+          <Animated.Text style={[styles.text, {opacity: fadeAnim3}]}>
+            Brisbane
+          </Animated.Text>
+        </View>
       </View>
-    </View>
+    </LayouImage>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#00AAB8',
+    // backgroundColor: '#00AAB8',
     justifyContent: 'center',
     alignItems: 'center',
   },

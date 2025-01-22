@@ -7,6 +7,7 @@ import {
   Image,
   ScrollView,
 } from 'react-native';
+import LayouImage from '../components/latout/LayouImage';
 
 const CreatePlace = ({route, navigation}) => {
   const [selectedType, setSelectedType] = useState(null);
@@ -42,65 +43,70 @@ const CreatePlace = ({route, navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.backButton}>
-          <Image
-            source={require('../assets/icons/back.png')}
-            style={styles.backIcon}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Add Place</Text>
-      </View>
-
-      {/* Content */}
-      <View style={styles.wrapper}>
-        <View style={styles.content}>
-          <Text style={styles.sectionTitle}>Type</Text>
-
-          <ScrollView
-            style={styles.typeContainer}
-            showsVerticalScrollIndicator={false}>
-            {types.map(type => (
-              <TouchableOpacity
-                key={type.id}
-                style={[
-                  styles.typeButton,
-                  selectedType === type.name && styles.selectedType,
-                ]}
-                onPress={() => setSelectedType(type.name)}>
-                <Image
-                  source={type.icon}
-                  style={[
-                    styles.typeIcon,
-                    selectedType === type.name && styles.selectedTypeIcon,
-                    {tintColor: '#00AAB8'},
-                  ]}
-                />
-                <Text
-                  style={[
-                    styles.typeText,
-                    selectedType === type.name && styles.selectedTypeText,
-                  ]}>
-                  {type.name}
-                </Text>
-              </TouchableOpacity>
-            ))}
-          </ScrollView>
+    <LayouImage>
+      <View style={styles.container}>
+        {/* Header */}
+        <View style={styles.header}>
+          <TouchableOpacity
+            onPress={() => navigation.goBack()}
+            style={styles.backButton}>
+            <Image
+              source={require('../assets/icons/back.png')}
+              style={styles.backIcon}
+            />
+          </TouchableOpacity>
+          <Text style={styles.headerTitle}>Add Place</Text>
         </View>
-      </View>
 
-      {/* Next Button */}
-      <TouchableOpacity
-        style={[styles.nextButton, !selectedType && styles.nextButtonDisabled]}
-        onPress={handleNext}
-        disabled={!selectedType}>
-        <Text style={styles.nextButtonText}>Next</Text>
-      </TouchableOpacity>
-    </View>
+        {/* Content */}
+        <View style={styles.wrapper}>
+          <View style={styles.content}>
+            <Text style={styles.sectionTitle}>Type</Text>
+
+            <ScrollView
+              style={styles.typeContainer}
+              showsVerticalScrollIndicator={false}>
+              {types.map(type => (
+                <TouchableOpacity
+                  key={type.id}
+                  style={[
+                    styles.typeButton,
+                    selectedType === type.name && styles.selectedType,
+                  ]}
+                  onPress={() => setSelectedType(type.name)}>
+                  <Image
+                    source={type.icon}
+                    style={[
+                      styles.typeIcon,
+                      selectedType === type.name && styles.selectedTypeIcon,
+                      {tintColor: '#00AAB8'},
+                    ]}
+                  />
+                  <Text
+                    style={[
+                      styles.typeText,
+                      selectedType === type.name && styles.selectedTypeText,
+                    ]}>
+                    {type.name}
+                  </Text>
+                </TouchableOpacity>
+              ))}
+            </ScrollView>
+          </View>
+        </View>
+
+        {/* Next Button */}
+        <TouchableOpacity
+          style={[
+            styles.nextButton,
+            !selectedType && styles.nextButtonDisabled,
+          ]}
+          onPress={handleNext}
+          disabled={!selectedType}>
+          <Text style={styles.nextButtonText}>Next</Text>
+        </TouchableOpacity>
+      </View>
+    </LayouImage>
   );
 };
 
@@ -112,7 +118,7 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    // backgroundColor: '#000000',
   },
   header: {
     flexDirection: 'row',

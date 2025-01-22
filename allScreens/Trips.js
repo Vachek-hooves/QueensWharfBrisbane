@@ -8,6 +8,7 @@ import {
   FlatList,
 } from 'react-native';
 import {useAppStore} from '../store/context';
+import LayouImage from '../components/latout/LayouImage';
 
 const Trips = ({navigation}) => {
   const {trips} = useAppStore();
@@ -17,7 +18,9 @@ const Trips = ({navigation}) => {
       style={styles.tripCard}
       onPress={() => navigation.navigate('TripDetails', {trip: item})}>
       <Image
-        source={item.image ? {uri: item.image} : require('../assets/icons/plane.png')}
+        source={
+          item.image ? {uri: item.image} : require('../assets/icons/plane.png')
+        }
         style={styles.tripImage}
       />
       <View style={styles.tripInfo}>
@@ -55,51 +58,53 @@ const Trips = ({navigation}) => {
   );
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.headerTitle}>Trips</Text>
+    <LayouImage>
+      <View style={styles.container}>
+        <Text style={styles.headerTitle}>Trips</Text>
 
-      {trips.length === 0 ? (
-        <View style={styles.contentContainer}>
-          <View style={styles.emptyStateContainer}>
-            <Image
-              source={require('../assets/icons/plane.png')}
-              style={styles.emptyStateIcon}
+        {trips.length === 0 ? (
+          <View style={styles.contentContainer}>
+            <View style={styles.emptyStateContainer}>
+              <Image
+                source={require('../assets/icons/plane.png')}
+                style={styles.emptyStateIcon}
+              />
+              <Text style={styles.emptyStateTitle}>Nothing added yet</Text>
+              <Text style={styles.emptyStateSubtitle}>
+                Click on the button below to add the first ride
+              </Text>
+
+              <TouchableOpacity
+                style={styles.addButton}
+                onPress={() => navigation.navigate('AddTrip')}>
+                <Text style={styles.addButtonText}>Add Trip</Text>
+              </TouchableOpacity>
+            </View>
+          </View>
+        ) : (
+          <View>
+            <FlatList
+              data={trips}
+              renderItem={renderTrip}
+              keyExtractor={item => item.id}
+              contentContainerStyle={styles.tripsList}
             />
-            <Text style={styles.emptyStateTitle}>Nothing added yet</Text>
-            <Text style={styles.emptyStateSubtitle}>
-              Click on the button below to add the first ride
-            </Text>
-
             <TouchableOpacity
               style={styles.addButton}
               onPress={() => navigation.navigate('AddTrip')}>
               <Text style={styles.addButtonText}>Add Trip</Text>
             </TouchableOpacity>
           </View>
-        </View>
-      ) : (
-        <View>
-        <FlatList
-          data={trips}
-          renderItem={renderTrip}
-          keyExtractor={item => item.id}
-          contentContainerStyle={styles.tripsList}
-        />
-        <TouchableOpacity
-              style={styles.addButton}
-              onPress={() => navigation.navigate('AddTrip')}>
-              <Text style={styles.addButtonText}>Add Trip</Text>
-            </TouchableOpacity>
-        </View>
-      )}
-    </View>
+        )}
+      </View>
+    </LayouImage>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    // backgroundColor: '#000000',
   },
   headerTitle: {
     color: '#FFFFFF',
@@ -148,7 +153,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     borderRadius: 25,
     minWidth: '90%',
-    marginHorizontal:20
+    marginHorizontal: 20,
   },
   addButtonText: {
     color: '#FFFFFF',

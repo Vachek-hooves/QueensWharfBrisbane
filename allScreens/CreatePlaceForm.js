@@ -12,7 +12,7 @@ import {
 import {useAppStore} from '../store/context';
 import {launchImageLibrary} from 'react-native-image-picker';
 import MapView, {Marker} from 'react-native-maps';
-
+import LayouImage from '../components/latout/LayouImage';
 
 const CreatePlaceForm = ({route, navigation}) => {
   const {category} = route.params;
@@ -39,7 +39,7 @@ const CreatePlaceForm = ({route, navigation}) => {
   // Validate form whenever data changes
   useEffect(() => {
     const validateForm = () => {
-      const isValid = 
+      const isValid =
         image !== null &&
         formData.placeName.trim() !== '' &&
         formData.location !== '' &&
@@ -47,7 +47,7 @@ const CreatePlaceForm = ({route, navigation}) => {
         workingHours.from !== '' &&
         workingHours.to !== '' &&
         formData.conveniences.length >= 0;
-      
+
       setIsFormValid(isValid);
     };
 
@@ -95,222 +95,226 @@ const CreatePlaceForm = ({route, navigation}) => {
   };
 
   return (
-    <View style={styles.container}>
-      {/* Header */}
-      <View style={styles.header}>
-        <TouchableOpacity
-          onPress={() => navigation.goBack()}
-          style={styles.backButton}>
-          <Image
-            source={require('../assets/icons/back.png')}
-            style={styles.backIcon}
-          />
-        </TouchableOpacity>
-        <Text style={styles.headerTitle}>Add Trip</Text>
-      </View>
-
-      <ScrollView style={styles.content}>
-        <View style={styles.formContainer}>
-          {/* Image Picker */}
+    <LayouImage>
+      <View style={styles.container}>
+        {/* Header */}
+        <View style={styles.header}>
           <TouchableOpacity
-            style={styles.imagePickerButton}
-            onPress={handleImagePick}>
-            <View style={styles.imagePlaceholder}>
-              {image ? (
-                <Image source={{uri: image}} style={styles.selectedImage} />
-              ) : (
-                <Image
-                  source={require('../assets/icons/camera.png')}
-                  style={styles.cameraIcon}
-                />
-              )}
-            </View>
+            onPress={() => navigation.goBack()}
+            style={styles.backButton}>
+            <Image
+              source={require('../assets/icons/back.png')}
+              style={styles.backIcon}
+            />
           </TouchableOpacity>
+          <Text style={styles.headerTitle}>Add Trip</Text>
+        </View>
 
-          {/* Form Fields */}
-          <TextInput
-            style={styles.input}
-            placeholder="Place Name"
-            placeholderTextColor="#666666"
-            value={formData.placeName}
-            onChangeText={text => setFormData({...formData, placeName: text})}
-          />
+        <ScrollView style={styles.content}>
+          <View style={styles.formContainer}>
+            {/* Image Picker */}
+            <TouchableOpacity
+              style={styles.imagePickerButton}
+              onPress={handleImagePick}>
+              <View style={styles.imagePlaceholder}>
+                {image ? (
+                  <Image source={{uri: image}} style={styles.selectedImage} />
+                ) : (
+                  <Image
+                    source={require('../assets/icons/camera.png')}
+                    style={styles.cameraIcon}
+                  />
+                )}
+              </View>
+            </TouchableOpacity>
 
-          <TouchableOpacity
-            style={styles.input}
-            onPress={() => setIsMapVisible(true)}>
-            <Text
-              style={[
-                styles.inputText,
-                !formData.location && styles.placeholder,
-              ]}>
-              {formData.location || 'Location'}
-            </Text>
-          </TouchableOpacity>
+            {/* Form Fields */}
+            <TextInput
+              style={styles.input}
+              placeholder="Place Name"
+              placeholderTextColor="#666666"
+              value={formData.placeName}
+              onChangeText={text => setFormData({...formData, placeName: text})}
+            />
 
-          <TextInput
-            style={styles.input}
-            placeholder="Description"
-            placeholderTextColor="#666666"
-            value={formData.description}
-            onChangeText={text => setFormData({...formData, description: text})}
-            multiline
-          />
+            <TouchableOpacity
+              style={styles.input}
+              onPress={() => setIsMapVisible(true)}>
+              <Text
+                style={[
+                  styles.inputText,
+                  !formData.location && styles.placeholder,
+                ]}>
+                {formData.location || 'Location'}
+              </Text>
+            </TouchableOpacity>
 
-          <View style={styles.workingHoursContainer}>
-            <Text style={styles.sectionTitle}>Working Hours</Text>
-            <View style={styles.hoursRow}>
-              <TouchableOpacity
-                style={[styles.input, styles.timeInput]}
-                onPress={() => {
-                  setTimePickerType('from');
-                  setShowTimePicker(true);
-                }}>
-                <Text
-                  style={[
-                    styles.inputText,
-                    !workingHours.from && styles.placeholder,
-                  ]}>
-                  {workingHours.from || 'From'}
-                </Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={[styles.input, styles.timeInput]}
-                onPress={() => {
-                  setTimePickerType('to');
-                  setShowTimePicker(true);
-                }}>
-                <Text
-                  style={[
-                    styles.inputText,
-                    !workingHours.to && styles.placeholder,
-                  ]}>
-                  {workingHours.to || 'To'}
-                </Text>
-              </TouchableOpacity>
-            </View>
-          </View>
+            <TextInput
+              style={styles.input}
+              placeholder="Description"
+              placeholderTextColor="#666666"
+              value={formData.description}
+              onChangeText={text =>
+                setFormData({...formData, description: text})
+              }
+              multiline
+            />
 
-          {/* Conveniences Section */}
-          <View style={styles.conveniencesSection}>
-            <Text style={styles.sectionTitle}>Conveniences</Text>
-            {formData.conveniences.map((convenience, index) => (
-              <View key={index} style={styles.convenienceItem}>
-                <Text style={styles.convenienceText}>{convenience}</Text>
+            <View style={styles.workingHoursContainer}>
+              <Text style={styles.sectionTitle}>Working Hours</Text>
+              <View style={styles.hoursRow}>
                 <TouchableOpacity
+                  style={[styles.input, styles.timeInput]}
                   onPress={() => {
-                    const newConveniences = [...formData.conveniences];
-                    newConveniences.splice(index, 1);
-                    setFormData({...formData, conveniences: newConveniences});
+                    setTimePickerType('from');
+                    setShowTimePicker(true);
                   }}>
-                  <Text style={styles.removeConvenienceText}>×</Text>
+                  <Text
+                    style={[
+                      styles.inputText,
+                      !workingHours.from && styles.placeholder,
+                    ]}>
+                    {workingHours.from || 'From'}
+                  </Text>
+                </TouchableOpacity>
+                <TouchableOpacity
+                  style={[styles.input, styles.timeInput]}
+                  onPress={() => {
+                    setTimePickerType('to');
+                    setShowTimePicker(true);
+                  }}>
+                  <Text
+                    style={[
+                      styles.inputText,
+                      !workingHours.to && styles.placeholder,
+                    ]}>
+                    {workingHours.to || 'To'}
+                  </Text>
                 </TouchableOpacity>
               </View>
-            ))}
-            <View style={styles.convenienceContainer}>
-              <TextInput
-                style={[styles.input, styles.convenienceInput]}
-                placeholder="Add convenience"
-                placeholderTextColor="#666666"
-                value={newConvenience}
-                onChangeText={setNewConvenience}
-              />
+            </View>
+
+            {/* Conveniences Section */}
+            <View style={styles.conveniencesSection}>
+              <Text style={styles.sectionTitle}>Conveniences</Text>
+              {formData.conveniences.map((convenience, index) => (
+                <View key={index} style={styles.convenienceItem}>
+                  <Text style={styles.convenienceText}>{convenience}</Text>
+                  <TouchableOpacity
+                    onPress={() => {
+                      const newConveniences = [...formData.conveniences];
+                      newConveniences.splice(index, 1);
+                      setFormData({...formData, conveniences: newConveniences});
+                    }}>
+                    <Text style={styles.removeConvenienceText}>×</Text>
+                  </TouchableOpacity>
+                </View>
+              ))}
+              <View style={styles.convenienceContainer}>
+                <TextInput
+                  style={[styles.input, styles.convenienceInput]}
+                  placeholder="Add convenience"
+                  placeholderTextColor="#666666"
+                  value={newConvenience}
+                  onChangeText={setNewConvenience}
+                />
+                <TouchableOpacity
+                  style={styles.addButton}
+                  onPress={handleAddConvenience}>
+                  <Text style={styles.addButtonText}>+</Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+          </View>
+        </ScrollView>
+
+        {/* Submit Button */}
+        <TouchableOpacity
+          style={[styles.doneButton, isFormValid && styles.doneButtonActive]}
+          onPress={handleSubmit}
+          disabled={!isFormValid}>
+          <Text style={styles.doneButtonText}>Done</Text>
+        </TouchableOpacity>
+
+        <Modal
+          visible={isMapVisible}
+          transparent={true}
+          animationType="slide"
+          onRequestClose={() => setIsMapVisible(false)}>
+          <View style={styles.modalOverlay}>
+            <View style={styles.mapContainer}>
+              <MapView
+                style={styles.map}
+                initialRegion={{
+                  latitude: -27.47,
+                  longitude: 153.02,
+                  latitudeDelta: 0.0922,
+                  longitudeDelta: 0.0421,
+                }}
+                onPress={e => setSelectedLocation(e.nativeEvent.coordinate)}>
+                {selectedLocation && <Marker coordinate={selectedLocation} />}
+              </MapView>
               <TouchableOpacity
-                style={styles.addButton}
-                onPress={handleAddConvenience}>
-                <Text style={styles.addButtonText}>+</Text>
+                style={styles.confirmLocationButton}
+                onPress={() => {
+                  if (selectedLocation) {
+                    setFormData({
+                      ...formData,
+                      location: `${selectedLocation.latitude}, ${selectedLocation.longitude}`,
+                    });
+                    setIsMapVisible(false);
+                  }
+                }}>
+                <Text style={styles.confirmLocationText}>Confirm Location</Text>
               </TouchableOpacity>
             </View>
           </View>
-        </View>
-      </ScrollView>
+        </Modal>
 
-      {/* Submit Button */}
-      <TouchableOpacity 
-        style={[styles.doneButton, isFormValid && styles.doneButtonActive]}
-        onPress={handleSubmit}
-        disabled={!isFormValid}>
-        <Text style={styles.doneButtonText}>Done</Text>
-      </TouchableOpacity>
+        <Modal
+          visible={showTimePicker}
+          transparent={true}
+          animationType="fade"
+          onRequestClose={() => setShowTimePicker(false)}>
+          <View style={styles.timePickerOverlay}>
+            <View style={styles.timePickerContainer}>
+              <Text style={styles.timePickerTitle}>
+                Select {timePickerType === 'from' ? 'Opening' : 'Closing'} Time
+              </Text>
 
-      <Modal
-        visible={isMapVisible}
-        transparent={true}
-        animationType="slide"
-        onRequestClose={() => setIsMapVisible(false)}>
-        <View style={styles.modalOverlay}>
-          <View style={styles.mapContainer}>
-            <MapView
-              style={styles.map}
-              initialRegion={{
-                latitude: -27.47,
-                longitude: 153.02,
-                latitudeDelta: 0.0922,
-                longitudeDelta: 0.0421,
-              }}
-              onPress={e => setSelectedLocation(e.nativeEvent.coordinate)}>
-              {selectedLocation && <Marker coordinate={selectedLocation} />}
-            </MapView>
-            <TouchableOpacity
-              style={styles.confirmLocationButton}
-              onPress={() => {
-                if (selectedLocation) {
-                  setFormData({
-                    ...formData,
-                    location: `${selectedLocation.latitude}, ${selectedLocation.longitude}`,
-                  });
-                  setIsMapVisible(false);
-                }
-              }}>
-              <Text style={styles.confirmLocationText}>Confirm Location</Text>
-            </TouchableOpacity>
-          </View>
-        </View>
-      </Modal>
+              <View style={styles.timePickerContent}>
+                <ScrollView style={styles.timeColumn}>
+                  {Array.from({length: 24}, (_, i) => {
+                    const hour = i.toString().padStart(2, '0');
+                    return (
+                      <TouchableOpacity
+                        key={hour}
+                        style={styles.timeOption}
+                        onPress={() => {
+                          const newTime = `${hour}:00`;
+                          setWorkingHours(prev => ({
+                            ...prev,
+                            [timePickerType]: newTime,
+                          }));
+                          setShowTimePicker(false);
+                        }}>
+                        <Text style={styles.timeText}>{hour}:00</Text>
+                      </TouchableOpacity>
+                    );
+                  })}
+                </ScrollView>
+              </View>
 
-      <Modal
-        visible={showTimePicker}
-        transparent={true}
-        animationType="fade"
-        onRequestClose={() => setShowTimePicker(false)}>
-        <View style={styles.timePickerOverlay}>
-          <View style={styles.timePickerContainer}>
-            <Text style={styles.timePickerTitle}>
-              Select {timePickerType === 'from' ? 'Opening' : 'Closing'} Time
-            </Text>
-
-            <View style={styles.timePickerContent}>
-              <ScrollView style={styles.timeColumn}>
-                {Array.from({length: 24}, (_, i) => {
-                  const hour = i.toString().padStart(2, '0');
-                  return (
-                    <TouchableOpacity
-                      key={hour}
-                      style={styles.timeOption}
-                      onPress={() => {
-                        const newTime = `${hour}:00`;
-                        setWorkingHours(prev => ({
-                          ...prev,
-                          [timePickerType]: newTime,
-                        }));
-                        setShowTimePicker(false);
-                      }}>
-                      <Text style={styles.timeText}>{hour}:00</Text>
-                    </TouchableOpacity>
-                  );
-                })}
-              </ScrollView>
+              <TouchableOpacity
+                style={styles.cancelButton}
+                onPress={() => setShowTimePicker(false)}>
+                <Text style={styles.cancelButtonText}>Cancel</Text>
+              </TouchableOpacity>
             </View>
-
-            <TouchableOpacity
-              style={styles.cancelButton}
-              onPress={() => setShowTimePicker(false)}>
-              <Text style={styles.cancelButtonText}>Cancel</Text>
-            </TouchableOpacity>
           </View>
-        </View>
-      </Modal>
-    </View>
+        </Modal>
+      </View>
+    </LayouImage>
   );
 };
 
@@ -319,7 +323,7 @@ export default CreatePlaceForm;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    // backgroundColor: '#000000',
   },
   header: {
     flexDirection: 'row',

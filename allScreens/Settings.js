@@ -12,6 +12,7 @@ import {
 } from 'react-native';
 import {useAppStore} from '../store/context';
 import {launchImageLibrary} from 'react-native-image-picker';
+import LayouImage from '../components/latout/LayouImage';
 
 const Settings = () => {
   const {userData, updateUserProfile} = useAppStore();
@@ -49,62 +50,69 @@ const Settings = () => {
   };
 
   const seePrivacyPolicy = () => {
-    Linking.openURL('https://www.termsfeed.com/live/9d179efe-2092-4304-85c6-bef862da7249');
+    Linking.openURL(
+      'https://www.termsfeed.com/live/9d179efe-2092-4304-85c6-bef862da7249',
+    );
   };
 
   return (
-    <View style={styles.container}>
-      <Text style={styles.headerTitle}>Profile</Text>
+    <LayouImage>
+      <View style={styles.container}>
+        <Text style={styles.headerTitle}>Profile</Text>
 
-      <ScrollView style={styles.content}>
-        {/* Profile Image */}
-        <View style={styles.imageContainer}>
-          <Image
-            source={
-              editedData.image
-                ? {uri: editedData.image}
-                : require('../assets/icons/placeholder2.png')
-            }
-            style={styles.profileImage}
-          />
-          <TouchableOpacity
-            style={styles.editImageButton}
-            onPress={handleImagePick}>
+        <ScrollView style={styles.content}>
+          {/* Profile Image */}
+          <View style={styles.imageContainer}>
             <Image
-              source={require('../assets/icons/edit.png')}
-              style={styles.editIcon}
+              source={
+                editedData.image
+                  ? {uri: editedData.image}
+                  : require('../assets/icons/placeholder2.png')
+              }
+              style={styles.profileImage}
             />
+            <TouchableOpacity
+              style={styles.editImageButton}
+              onPress={handleImagePick}>
+              <Image
+                source={require('../assets/icons/edit.png')}
+                style={styles.editIcon}
+              />
+            </TouchableOpacity>
+          </View>
+
+          {/* Profile Info */}
+          <View style={styles.infoContainer}>
+            {isEditing ? (
+              <TextInput
+                style={styles.nameInput}
+                value={editedData.name}
+                onChangeText={text =>
+                  setEditedData({...editedData, name: text})
+                }
+                placeholder="Enter your name"
+                placeholderTextColor="#666666"
+              />
+            ) : (
+              <Text style={styles.name}>
+                {userData.name || 'Add your name'}
+              </Text>
+            )}
+            <Text style={styles.email}>{userData.email}</Text>
+          </View>
+
+          {/* Edit/Save Button */}
+          <TouchableOpacity
+            style={styles.editButton}
+            onPress={isEditing ? () => handleSave(editedData) : toggleEdit}>
+            <Text style={styles.editButtonText}>
+              {isEditing ? 'Save' : 'Edit Profile'}
+            </Text>
           </TouchableOpacity>
-        </View>
 
-        {/* Profile Info */}
-        <View style={styles.infoContainer}>
-          {isEditing ? (
-            <TextInput
-              style={styles.nameInput}
-              value={editedData.name}
-              onChangeText={text => setEditedData({...editedData, name: text})}
-              placeholder="Enter your name"
-              placeholderTextColor="#666666"
-            />
-          ) : (
-            <Text style={styles.name}>{userData.name || 'Add your name'}</Text>
-          )}
-          <Text style={styles.email}>{userData.email}</Text>
-        </View>
-
-        {/* Edit/Save Button */}
-        <TouchableOpacity
-          style={styles.editButton}
-          onPress={isEditing ? () => handleSave(editedData) : toggleEdit}>
-          <Text style={styles.editButtonText}>
-            {isEditing ? 'Save' : 'Edit Profile'}
-          </Text>
-        </TouchableOpacity>
-
-        {/* Menu Items */}
-        <View style={styles.menuContainer}>
-          {/* <TouchableOpacity style={styles.menuItem}>
+          {/* Menu Items */}
+          <View style={styles.menuContainer}>
+            {/* <TouchableOpacity style={styles.menuItem}>
             <Text style={styles.menuText}>Developer Website</Text>
             <Image
               source={require('../assets/icons/arrow-right.png')}
@@ -112,32 +120,35 @@ const Settings = () => {
             />
           </TouchableOpacity> */}
 
-          <TouchableOpacity style={styles.menuItem} onPress={seePrivacyPolicy}>
-            <Text style={styles.menuText}>Privacy Policy</Text>
-            <Image
-              source={require('../assets/icons/arrow-right.png')}
-              style={styles.arrowIcon}
-            />
-          </TouchableOpacity>
+            <TouchableOpacity
+              style={styles.menuItem}
+              onPress={seePrivacyPolicy}>
+              <Text style={styles.menuText}>Privacy Policy</Text>
+              <Image
+                source={require('../assets/icons/arrow-right.png')}
+                style={styles.arrowIcon}
+              />
+            </TouchableOpacity>
 
-          {/* <TouchableOpacity style={styles.menuItem}>
+            {/* <TouchableOpacity style={styles.menuItem}>
             <Text style={styles.menuText}>Terms of Use</Text>
             <Image
               source={require('../assets/icons/arrow-right.png')}
               style={styles.arrowIcon}
             />
           </TouchableOpacity> */}
-        </View>
-      </ScrollView>
-      <View style={{height: 100}} />
-    </View>
+          </View>
+        </ScrollView>
+        <View style={{height: 100}} />
+      </View>
+    </LayouImage>
   );
 };
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000000',
+    // backgroundColor: '#000000',
   },
   headerTitle: {
     color: '#FFFFFF',
